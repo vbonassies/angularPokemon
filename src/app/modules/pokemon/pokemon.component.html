@@ -1,1 +1,1 @@
-<img #pokemon [src]="pokemonSprite" class="pokemonRenderer" />
+<img #pokemon [src]="pokemonSprite" class="pokemonRenderer" [@attackingAnimation]="pokemon.isAttacking?'attack':'sleep'"/>
