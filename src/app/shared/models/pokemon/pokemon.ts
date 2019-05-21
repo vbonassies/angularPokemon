@@ -9,6 +9,9 @@ export class Pokemon {
     public Moves: Move[];
     public Type: PokemonType;
 
+    public isAttacked = false;
+    public isAttacking = false;
+
 
     constructor(pokemonName: string, speed: number, moves: Move[], type: PokemonType) {
         this.Name = pokemonName;
@@ -43,7 +46,8 @@ export class Pokemon {
         }
         let finalPv;
         if (generatedAccuracy <= moveToExecute.Accuracy) {
-
+            this.isAttacking = true;
+            enemy.isAttacked = true;
             if (this.isStrongAgainstEnemy(enemy.Type)) {
                 finalPv = enemy.Pv - moveToExecute.Damage * 2;
 
@@ -54,6 +58,10 @@ export class Pokemon {
                 finalPv = 0;
             }
             enemy.Pv = finalPv;
+            setTimeout(() => {
+                this.isAttacking = false;
+                enemy.isAttacked = false;
+            }, 1000);
             console.log(`${this.Name} has attacked with ${moveToExecute.Name}!. ${moveToExecute.Damage} infliged damage`);
             return MoveResult.MoveSuccess;
         }

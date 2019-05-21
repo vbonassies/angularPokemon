@@ -1,0 +1,7 @@
+.moveSelector {
+    position: relative;
+    background-color: white;
+    z-index: 1000;
+    width: 600px;
+    height: 100px;
+}

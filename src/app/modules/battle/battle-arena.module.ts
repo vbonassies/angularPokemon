@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { BattleArenaComponent } from './battle-arena.component';
 import {PokemonModule} from '../pokemon/pokemon.module';
+import {MoveSelectorModule} from '../move-selector/move-selector.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import {PokemonModule} from '../pokemon/pokemon.module';
   ],
   imports: [
     BrowserModule,
-    PokemonModule
+    PokemonModule,
+    MoveSelectorModule
   ],
   exports: [
     BattleArenaComponent
