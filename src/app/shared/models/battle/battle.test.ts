@@ -1,12 +1,13 @@
-import {Pokemon, pokemonType} from "../pokemon/pokemon";
-import {Battle} from "../battle/battle";
-import {Move} from "../move/move";
+import {Pokemon} from '../pokemon/pokemon';
+import {PokemonType} from '../pokemon/pokemon-types';
+import {Battle} from '../battle/battle';
+import {Move} from '../move/move';
 
-const megaPuchMove = new Move("Mega Punch", "Mega Punch Description", 85, 20);
-const rollingStonesMove = new Move("Rolling Stones", "Rolling Stones Description", 80, 10);
-const canonAOMove = new Move("Canon O", "Canon O Description", 10, 2);
-const pikachu = new Pokemon('Pikachu', 90, [megaPuchMove], pokemonType.Electric);
-const carapuce = new Pokemon('Carapuce', 43, [rollingStonesMove, canonAOMove], pokemonType.Water);
+const megaPuchMove = new Move('Mega Punch', 'Mega Punch Description', 85, 20);
+const rollingStonesMove = new Move('Rolling Stones', 'Rolling Stones Description', 80, 10);
+const canonAOMove = new Move('Canon O', 'Canon O Description', 10, 2);
+const pikachu = new Pokemon('Pikachu', 90, [megaPuchMove], PokemonType.Electric);
+const carapuce = new Pokemon('Carapuce', 43, [rollingStonesMove, canonAOMove], PokemonType.Water);
 
 
 test('Battle is correctly constructed', () => {
@@ -45,7 +46,7 @@ test('getMove should return the move regarding attackers order (firstPokemon as 
 
 test('Test if first pokemon win during launchTurn', () =>  {
     const pikaUlti = pikachu;
-    const pikachuUltiMove = new Move("UltiMove", "One shot for test", 100, 100);
+    const pikachuUltiMove = new Move('UltiMove', 'One shot for test', 100, 100);
     pikaUlti.Moves.push(pikachuUltiMove);
     const battle = new Battle(pikaUlti, carapuce);
     const carapuceMove = carapuce.Moves[0];
@@ -56,7 +57,7 @@ test('Test if first pokemon win during launchTurn', () =>  {
 
 test('Test if second pokemon win during launchTurn', () =>  {
     const pikaUlti = pikachu;
-    const pikachuUltiMove = new Move("UltiMove", "One shot for test", 100, 100);
+    const pikachuUltiMove = new Move('UltiMove', 'One shot for test', 100, 100);
     pikaUlti.Moves.push(pikachuUltiMove);
     const battle = new Battle(carapuce, pikaUlti);
     const carapuceMove = carapuce.Moves[0];
@@ -82,11 +83,11 @@ test('Test is battle ended if winner is set', () =>  {
 
 test('Test that regular fight end correctly', () =>  {
     const battle = new Battle(carapuce, pikachu);
-    while(!battle.isBattleEnded()) {
+    while (!battle.isBattleEnded()) {
         const carapuceMove = Math.floor(Math.random() * carapuce.Moves.length);
         const pikachuMove = Math.floor(Math.random() * pikachu.Moves.length);
-        var firstRandomAccuracy = Math.floor(Math.random() * 101);
-        var secondRandomAccuracy = Math.floor(Math.random() * 101);
+        let firstRandomAccuracy = Math.floor(Math.random() * 101);
+        let secondRandomAccuracy = Math.floor(Math.random() * 101);
         battle.launchTurn(carapuce.Moves[carapuceMove].Name, pikachu.Moves[pikachuMove].Name, firstRandomAccuracy, secondRandomAccuracy);
     }
     expect(battle.isBattleEnded()).toBe(true);

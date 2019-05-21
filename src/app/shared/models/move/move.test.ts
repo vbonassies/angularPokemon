@@ -1,4 +1,4 @@
-import {Move} from "./move";
+import {Move} from './move';
 
 test('Move is correctly constructed', () => {
     const moveName = 'mega-punch';

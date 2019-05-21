@@ -18,7 +18,7 @@ export class Pokemon {
         this.Type = type;
     }
 
-    public isDie() : boolean {
+    public isDie(): boolean {
         return this.Pv <= 0;
     }
 
@@ -50,8 +50,7 @@ export class Pokemon {
             } else {
                 finalPv = enemy.Pv - moveToExecute.Damage;
             }
-            if(finalPv <= 0)
-            {
+            if (finalPv <= 0) {
                 finalPv = 0;
             }
             enemy.Pv = finalPv;
