@@ -1,0 +1,22 @@
+#preloader {
+    z-index: 10000;
+    background-color: #262a2e;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+#preloader > img {
+    height: 200px;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+}
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+
+html.preloader {
+    overflow: hidden;
+}

@@ -1,0 +1,15 @@
+.pokemonRenderer {
+    position: absolute;
+    width: 150px;
+    z-index: 100;
+}
+
+.firstPokemon {
+    bottom: 0px;
+    left: 125px;
+}
+
+.secondPokemon {
+    top: 100px;
+    right: 50px;
+}
