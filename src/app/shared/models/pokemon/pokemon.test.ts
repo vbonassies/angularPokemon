@@ -1,13 +1,15 @@
 import {Pokemon} from "./pokemon";
 import {Move} from "../move/move";
 import {MoveResult} from "../move/move-result";
+import {pokemonType} from "./pokemon"
 
 test('Pokemon is correctly constructed', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMoveFirst = new Move("mega-punch", "MegaPunch applyMove!", 95, 15);
     const pokemonMoveSecond = new Move("Sleep", "Useless applyMove", 100, 0);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMoveFirst, pokemonMoveSecond]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMoveFirst, pokemonMoveSecond], type);
     expect(newPokemon.Name).toBe(pokemonName);
     expect(newPokemon.Speed).toBe(pokemonSpeed);
     expect(newPokemon.Pv).toBe(100);
@@ -20,7 +22,8 @@ test('Pokemon is correctly constructed', () => {
 test('isDie should return true when PV <= 0', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, null);
+    const type = pokemonType.Electric;
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, null, type);
 
     newPokemon.Pv = 0;
     expect(newPokemon.isDie()).toBe(true);
@@ -35,9 +38,10 @@ test('isDie should return true when PV <= 0', () => {
 test('hasMove return true when pokemon has the move', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMove = new Move("ATestMove", "Test description", 0,0);
     const fakeMove = new Move("AFakeTestMove", "Fake move not in list", 0,0);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
     expect(newPokemon.hasMove(pokemonMove)).toBe(true);
     expect(newPokemon.hasMove(fakeMove)).toBe(false);
@@ -46,8 +50,9 @@ test('hasMove return true when pokemon has the move', () => {
 test('undefined move must return false', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMove = new Move("ATestMove", "Test description", 0,0);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
     expect(newPokemon.applyMove(newPokemon, null, 1)).toBe(MoveResult.NoMove);
     expect(newPokemon.Pv).toBe(100);
@@ -56,8 +61,9 @@ test('undefined move must return false', () => {
 test('If generated accuracy is greater than move accuracy, applyMove must fail', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMove = new Move("ATestMove", "Test description", 15,10);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
     expect(newPokemon.applyMove(newPokemon, pokemonMove, 99)).toBe(MoveResult.MoveFails);
     expect(newPokemon.Pv).toBe(100);
@@ -66,8 +72,9 @@ test('If generated accuracy is greater than move accuracy, applyMove must fail',
 test('If generated accuracy is less than move accuracy, applyMove must fail, applyMove must success', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMove = new Move("ATestMove", "Test description", 15,10);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
     let expectedNewPv = newPokemon.Pv - pokemonMove.Damage;
     expect(newPokemon.applyMove(newPokemon, pokemonMove, 2)).toBe(MoveResult.MoveSuccess);
@@ -77,8 +84,9 @@ test('If generated accuracy is less than move accuracy, applyMove must fail, app
 test('If generated accuracy is equals than move accuracy, applyMove must fail, applyMove must success', () => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
+    const type = pokemonType.Electric;
     const pokemonMove = new Move("ATestMove", "Test description", 15,10);
-    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove]);
+    const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
     let expectedNewPv = newPokemon.Pv - pokemonMove.Damage;
     expect(newPokemon.applyMove(newPokemon, pokemonMove, 15)).toBe(MoveResult.MoveSuccess);

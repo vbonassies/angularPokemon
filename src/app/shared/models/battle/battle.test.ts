@@ -1,12 +1,12 @@
-import {Pokemon} from "../pokemon/pokemon";
+import {Pokemon, pokemonType} from "../pokemon/pokemon";
 import {Battle} from "../battle/battle";
 import {Move} from "../move/move";
 
 const megaPuchMove = new Move("Mega Punch", "Mega Punch Description", 85, 20);
 const rollingStonesMove = new Move("Rolling Stones", "Rolling Stones Description", 80, 10);
 const canonAOMove = new Move("Canon O", "Canon O Description", 10, 2);
-const pikachu = new Pokemon('Pikachu', 90, [megaPuchMove]);
-const carapuce = new Pokemon('Carapuce', 43, [rollingStonesMove, canonAOMove]);
+const pikachu = new Pokemon('Pikachu', 90, [megaPuchMove], pokemonType.Electric);
+const carapuce = new Pokemon('Carapuce', 43, [rollingStonesMove, canonAOMove], pokemonType.Water);
 
 
 test('Battle is correctly constructed', () => {
