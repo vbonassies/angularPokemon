@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+<div #moveSelector class="moveSelector" >
+
+</div>
+=======
+<div class="moveSelectorContainer">
+    <div #moveSelector class="moveSelector" >
+
+    </div>
+</div>
+>>>>>>> Start move selector and add move properties
