@@ -1,27 +1,21 @@
-import {Move} from "../move/move";
-import {MoveResult} from "../move/move-result";
-
-export enum pokemonType {
-    Electric = "eletric",
-    Fire = "fire",
-    Water = "water",
-    Grass = "grass",
-}
+import {PokemonType} from './pokemon-types';
+import {Move} from '../move/move';
+import {MoveResult} from '../move/move-result';
 
 export class Pokemon {
     public Name: string;
     public Speed: number;
     public Pv: number;
     public Moves: Move[];
-    public type: pokemonType;
+    public Type: PokemonType;
 
 
-    constructor(pokemonName: string, speed: number, moves: Move[], type: pokemonType) {
+    constructor(pokemonName: string, speed: number, moves: Move[], type: PokemonType) {
         this.Name = pokemonName;
         this.Speed = speed;
         this.Moves = moves;
         this.Pv = 100;
-        this.type = type;
+        this.Type = type;
     }
 
     public isDie() : boolean {
@@ -32,25 +26,25 @@ export class Pokemon {
         return this.Moves.indexOf(move) !== -1;
     }
 
-    public isStrongAgainstEnemy(secondPokemonType: pokemonType) {
-        if (this.type == pokemonType.Fire && secondPokemonType == pokemonType.Water) {
+    public isStrongAgainstEnemy(secondPokemonType: PokemonType) {
+        if (this.Type === PokemonType.Fire && secondPokemonType === PokemonType.Water) {
             return true;
-        } else if (this.type == pokemonType.Grass && secondPokemonType == pokemonType.Water) {
+        } else if (this.Type === PokemonType.Grass && secondPokemonType === PokemonType.Water) {
             return true;
-        } else if (this.type == pokemonType.Water && secondPokemonType == pokemonType.Fire) {
+        } else if (this.Type === PokemonType.Water && secondPokemonType === PokemonType.Fire) {
             return true;
-        } else return this.type == pokemonType.Electric && secondPokemonType == pokemonType.Water;
+        } else { return this.Type === PokemonType.Electric && secondPokemonType === PokemonType.Water; }
     }
 
     public applyMove(enemy: Pokemon, moveToExecute: Move, generatedAccuracy: number): MoveResult {
-        if (moveToExecute == undefined || !this.hasMove(moveToExecute)) {
+        if (!moveToExecute || !this.hasMove(moveToExecute)) {
             console.log(`${this.Name} has nothing to do..`);
             return MoveResult.NoMove;
         }
         let finalPv;
         if (generatedAccuracy <= moveToExecute.Accuracy) {
 
-            if(this.isStrongAgainstEnemy(enemy.type)) {
+            if (this.isStrongAgainstEnemy(enemy.Type)) {
                 finalPv = enemy.Pv - moveToExecute.Damage * 2;
 
             } else {
