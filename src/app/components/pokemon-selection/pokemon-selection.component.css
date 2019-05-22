@@ -1,8 +1,16 @@
 .card {
+    display: block;
     margin-bottom: 30px;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .pokesprite {
-    max-width: 130px;
+    height: 60px;
+    width: auto;
+    display: inline-block;
+}
 
+.card-title{
+    margin-bottom: 0;
 }

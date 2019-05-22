@@ -15,18 +15,18 @@ export const availablePokemons = [
 ];
 
 export const availableFlyingPokemons = [
-  'zubat',
-  'pidgeot',
-  'ledyba',
-  'noctowl',
-  'togetic',
-  'yanma',
-  'yanmega',
-  'wingull',
-  'mantine',
-  'beautifly',
-  'charizard',
-  'skiploom'
+  'Zubat',
+  'Pidgeot',
+  'Ledyba',
+  'Noctowl',
+  'Togetic',
+  'Yanma',
+  'Yanmega',
+  'Wingull',
+  'Mantine',
+  'Beautifly',
+  'Charizard',
+  'Skiploom'
 ];
 
 export const backgroundAvailableFlyingPokemons = [
