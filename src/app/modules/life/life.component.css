@@ -55,7 +55,7 @@
     position: absolute;
 }
 
-.pvProgressFirst {
+.hpProgressFirst {
     height: 6px;
     width: 93px;
     bottom:38px;
@@ -69,7 +69,7 @@
     left:420px;
 }
 
-.pvProgressSecond {
+.hpProgressSecond {
     height: 6px;
     width: 96px;
     top:94px;

@@ -18,11 +18,21 @@ export class LifeComponent implements OnInit {
       this.lifeSprite = `/assets/pictures/life-${this.isFirst ? 'first' : 'second'}.png`;
   }
 
-  getPokemonXpPercents() {
+  getXpPercents() {
     return this.pokemon.Xp * 100 / this.pokemon.XpBeforeNextLevel;
   }
 
-  getPokemonHpPercents() {
+  getHpPercents() {
     return this.pokemon.Hp * 100 / this.pokemon.MaxHp;
+  }
+
+  getHpColor() {
+    const currentPercent = this.getHpPercents();
+    if (currentPercent <= 20) {
+      return 'bg-danger';
+    } else if (currentPercent <= 50) {
+      return 'bg-warning';
+    }
+    return 'bg-success';
   }
 }
