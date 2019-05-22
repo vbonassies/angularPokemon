@@ -11,6 +11,9 @@ describe('MoveSelectorComponent', () => {
   let component: MoveSelectorComponent;
   let compiled: HTMLElement;
 
+  const poke1 = new Pokemon('Attacker', 1, [], PokemonType.Electric);
+  const poke2 = new Pokemon('Enemy', 1, [], PokemonType.Electric);
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -25,9 +28,6 @@ describe('MoveSelectorComponent', () => {
   }));
 
   it('Should render damage message correctly', () => {
-    const poke1 = new Pokemon('Attacker', 1, [], PokemonType.Electric);
-    const poke2 = new Pokemon('Enemy', 1, [], PokemonType.Electric);
-
     component.attackLogs.push(new AttackLog(poke1, poke2, 10, false));
     component.attackLogs.push(new AttackLog(poke2, poke1, 15, false));
 
@@ -40,15 +40,13 @@ describe('MoveSelectorComponent', () => {
   });
 
   it('Should render kill message correctly', () => {
-    const poke1 = new Pokemon('Attacker', 1, [], PokemonType.Electric);
-    const poke2 = new Pokemon('Enemy', 1, [], PokemonType.Electric);
-
     component.attackLogs.push(new AttackLog(poke1, poke2, 10, true));
 
     fixture.detectChanges();
 
     const log = compiled.querySelector('.attackLog');
     expect(log.textContent).toContain('Attacker killed Enemy');
+    expect(log.classList).toContain('kill');
   });
 
 });

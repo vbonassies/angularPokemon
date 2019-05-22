@@ -29,6 +29,10 @@ $innerBorder: #e7dbe9;
   font-size: 12px;
 }
 
+.attackLog.kill {
+  color: red;
+}
+
 .double-border {
   background-color: $outerBorder;
   border: 5px solid $outerBorder;
