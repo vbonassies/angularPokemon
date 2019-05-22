@@ -32,6 +32,9 @@ $innerBorder: #e7dbe9;
 .attackLog.kill {
   color: red;
 }
+.attackLog.fail {
+  color: orange;
+}
 
 .double-border {
   background-color: $outerBorder;

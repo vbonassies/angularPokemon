@@ -1,13 +1,12 @@
 <div class="moveSelectorBackground">
     <div #moveSelector class="moveSelector double-border">
         <div class="logContainer">
-            <div *ngFor="let log of attackLogs" class="attackLog" [ngClass]="{'kill':log.isKill}">
-                <span *ngIf="!log.isKill">
-                    <b>{{log.attacker.Name}}</b> attacks <b>{{log.enemy.Name}}</b> dealing <b>{{log.damage}}</b> damage
-                </span>
-                <span *ngIf="log.isKill">
-                    <b>{{log.attacker.Name}}</b> killed <b>{{log.enemy.Name}}</b>
-                </span>
+            <div *ngFor="let log of attackLogs" class="attackLog"
+                 [ngClass]="{'kill':log.isKill, 'fail':log.attackFailed}">
+                <span *ngIf="!log.isKill && !log.skipRound && !log.attackFailed"><b>{{log.attacker.Name}}</b> attacks <b>{{log.enemy.Name}}</b> using <b>{{log.move.Name}}</b> dealing <b>{{log.damage}}</b> damage</span>
+                <span *ngIf="log.skipRound"><b>{{log.attacker.Name}}</b> skips it's round</span>
+                <span *ngIf="log.attackFailed"><b>{{log.attacker.Name}}</b> failed to use <b>{{log.move.Name}}</b></span>
+                <span *ngIf="log.isKill"><b>{{log.attacker.Name}}</b> killed <b>{{log.enemy.Name}}</b></span>
             </div>
         </div>
     </div>
