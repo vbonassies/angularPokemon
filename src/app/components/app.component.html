@@ -1,4 +1,4 @@
-<button routerLink="/battle">Start battle!</button>
+<button [routerLink]="['/battle', 'Pikachu']">Start battle!</button>
 <ul>
     <li *ngFor="let poke of pokedex">{{poke.Name}}</li>
 </ul>

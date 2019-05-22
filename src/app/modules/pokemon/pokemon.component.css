@@ -4,6 +4,22 @@
     z-index: 100;
 }
 
+.pokeballRenderer {
+    position: absolute;
+    width: 50px;
+    z-index: 100;
+}
+
+.firstPokeball {
+    bottom: 0px;
+    left: 0px;
+}
+
+.secondPokeball {
+    top: 0px;
+    right: 0px;
+}
+
 .firstPokemon {
     bottom: 0px;
     left: 125px;

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {BattleComponent} from './battle.component';
 
 const battleRoutes: Routes = [{
-    path: 'battle',
+    path: 'battle/:pokemonName',
     component: BattleComponent
 }];
 
