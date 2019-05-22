@@ -1,2 +1,1 @@
-<img *ngIf="pokeballVisible" src="/assets/pictures/pokeball.gif" [ngClass]="isFirst ? 'firstPokeball' : 'secondPokeball'" class="pokeballRenderer" [@pokeballAnimation]="shouldPop()"/>
-<img #pokemonRenderer [src]="pokemonSprite" [ngClass]="isFirst ? 'firstPokemon' : 'secondPokemon'" class="pokemonRenderer" [@pokemonAnimation]="getPokemonAnimation()" />
+<img [src]="lifeSprite">
