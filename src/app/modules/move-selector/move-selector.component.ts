@@ -4,7 +4,7 @@ import {Pokemon} from '../../shared/models/pokemon/pokemon';
 @Component({
   selector: 'app-move-selector',
   templateUrl: './move-selector.component.html',
-  styleUrls: ['./move-selector.component.css']
+  styleUrls: ['./move-selector.component.scss']
 })
 export class MoveSelectorComponent implements OnInit {
 
