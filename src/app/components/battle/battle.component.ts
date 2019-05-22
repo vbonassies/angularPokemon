@@ -9,7 +9,8 @@ import {PokemonType} from '../../shared/models/pokemon/pokemon-types';
 })
 export class BattleComponent implements OnInit {
 
-  battle: Battle = new Battle(new Pokemon('Charmander', 10, [], PokemonType.Fire), new Pokemon('Pikachu', 10, [], PokemonType.Electric));
+  battle: Battle = new Battle(new Pokemon('Charmander', 10, [], PokemonType.Fire),
+      new Pokemon('Pikachu', 10, [], PokemonType.Electric));
 
     ngOnInit(): void {
       setInterval(() => {
