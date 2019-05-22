@@ -6,6 +6,11 @@
     top: 0;
 }
 
+.startVideo {
+    width: 600px;
+    margin-top: 75px;
+}
+
 .battleArena {
     position: relative;
     background-size: cover;

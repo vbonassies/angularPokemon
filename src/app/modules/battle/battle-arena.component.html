@@ -1,9 +1,17 @@
 <div class="gameboy">
     <div class="gameboy-sceen">
-        <div [style.background-image]="'url(' + chooseArena + ')'" class="battleArena">
-            <app-pokemon-renderer *ngIf="battle.FirstPokemon" [pokemon]="battle.FirstPokemon" [isFirst]="true"></app-pokemon-renderer>
-            <app-pokemon-renderer *ngIf="battle.SecondPokemon" [pokemon]="battle.SecondPokemon" [isFirst]="false"></app-pokemon-renderer>
+        <video *ngIf="!wasSplashDisplayed" class="startVideo" autoplay (ended)="onSplashEnded()" >
+            <source src="/assets/videos/gameboy-start.mp4" type="video/mp4">
+        </video>
+        <div *ngIf="wasSplashDisplayed">
+            <audio *ngIf="withSound" loop autoplay >
+                <source src="/assets/sounds/battle-music.mp3" type="audio/mpeg">
+            </audio>
+            <div [style.background-image]="'url(' + chooseArena + ')'" class="battleArena">
+                <app-pokemon-renderer *ngIf="battle.FirstPokemon" [pokemon]="battle.FirstPokemon" [isFirst]="true"></app-pokemon-renderer>
+                <app-pokemon-renderer *ngIf="battle.SecondPokemon" [pokemon]="battle.SecondPokemon" [isFirst]="false"></app-pokemon-renderer>
+            </div>
+            <app-user-io [pokemon]="battle.FirstPokemon" ></app-user-io>
         </div>
-        <app-move-selector [pokemon]="battle.FirstPokemon" ></app-move-selector>
     </div>
 </div>
