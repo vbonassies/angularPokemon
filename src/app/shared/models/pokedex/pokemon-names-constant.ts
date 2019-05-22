@@ -10,5 +10,6 @@ export const availablePokemons = [
     'Caterpie',
     'Sandshrew',
     'Vulpix',
-    'Oddish'
+    'Oddish',
+    'Diglett'
 ];

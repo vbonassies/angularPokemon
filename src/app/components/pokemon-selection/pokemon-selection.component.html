@@ -1,0 +1,15 @@
+<div  class="container">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let poke of getAllPokemons()">
+            <div   class="card" >
+                <img class="card-img-top pokesprite" [src]="getPokeSprite(poke)" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{poke.Name}}</h5>
+                    <p class="card-text">{{poke.Type}}</p>
+                    <p class="card-text">{{poke.Moves}}</p>
+                    <a [routerLink]="['/battle', poke.Name]" class="btn btn-primary">I chose you!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
