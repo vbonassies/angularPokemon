@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Pokemon} from '../../shared/models/pokemon/pokemon';
+import { Component, Input, OnInit } from '@angular/core';
+import { Pokemon } from '../../shared/models/pokemon/pokemon';
+import { AttackLog } from '../../shared/models/battle/attack-log';
 
 @Component({
   selector: 'app-move-selector',
@@ -11,7 +12,8 @@ export class MoveSelectorComponent implements OnInit {
   @Input()
   pokemon: Pokemon;
 
-  ngOnInit(): void {
+  attackLogs: Array<AttackLog> = [];
 
+  ngOnInit(): void {
   }
 }

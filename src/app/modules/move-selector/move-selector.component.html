@@ -1,4 +1,14 @@
 <div class="moveSelectorBackground">
     <div #moveSelector class="moveSelector double-border">
+        <div class="logContainer">
+            <div *ngFor="let log of attackLogs" class="attackLog">
+                <span *ngIf="!log.isKill">
+                    <b>{{log.attacker.Name}}</b> attacks <b>{{log.enemy.Name}}</b> dealing <b>{{log.damage}}</b> damage
+                </span>
+                <span *ngIf="log.isKill">
+                    <b>{{log.attacker.Name}}</b> killed <b>{{log.enemy.Name}}</b>
+                </span>
+            </div>
+        </div>
     </div>
 </div>
