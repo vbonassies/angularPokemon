@@ -1,6 +1,27 @@
+:host {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+}
+
 .battleArena {
     position: relative;
     background-size: cover;
     width: 600px;
     height: 460px;
+}
+
+.gameboy {
+    background: url("../../../assets/pictures/gameboy.png") no-repeat center top;
+    text-align: center;
+    position: relative;
+    margin-top: -140px;
+    height: 1889px;
+}
+
+.gameboy-sceen {
+    display: inline-block;
+    margin-top: 168px;
 }
