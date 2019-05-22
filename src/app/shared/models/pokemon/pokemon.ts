@@ -6,7 +6,10 @@ import { AttackLog } from '../battle/attack-log';
 export class Pokemon {
   public Name: string;
   public Speed: number;
-  public Pv: number;
+  public Hp: number;
+  public MaxHp: number;
+  public XpBeforeNextLevel: number;
+  public Xp: number;
   public Moves: Move[];
   public Type: PokemonType;
 
@@ -18,12 +21,15 @@ export class Pokemon {
     this.Name = pokemonName;
     this.Speed = speed;
     this.Moves = moves;
-    this.Pv = 100;
+    this.Hp = 100;
+    this.MaxHp = 100;
+    this.XpBeforeNextLevel = 100;
+    this.Xp = 100;
     this.Type = type;
   }
 
   public isDie(): boolean {
-    return this.Pv <= 0;
+    return this.Hp <= 0;
   }
 
   public hasMove(move: Move): boolean {
@@ -52,15 +58,15 @@ export class Pokemon {
       this.isAttacking = true;
       enemy.isAttacked = true;
       if (this.isStrongAgainstEnemy(enemy.Type)) {
-        finalPv = enemy.Pv - moveToExecute.Damage * 2;
+        finalPv = enemy.Hp - moveToExecute.Damage * 2;
       } else {
-        finalPv = enemy.Pv - moveToExecute.Damage;
+        finalPv = enemy.Hp - moveToExecute.Damage;
       }
       if (finalPv <= 0) {
         finalPv = 0;
       }
-      const damageDealt = finalPv - enemy.Pv;
-      enemy.Pv = finalPv;
+      const damageDealt = finalPv - enemy.Hp;
+      enemy.Hp = finalPv;
       this.isAttacking = false;
       enemy.isAttacked = false;
       logger(AttackLog.attack(this, enemy, moveToExecute, damageDealt));

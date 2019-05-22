@@ -1,31 +1,77 @@
-.pokemonRenderer {
+.lifeRenderer {
     position: absolute;
-    width: 150px;
+    width: 200px;
     z-index: 100;
 }
 
-.pokeballRenderer {
+.firstLife {
+    bottom: 5px;
+    right: 40px;
+}
+
+.secondLife {
+    top: 60px;
+    left: 40px;
+}
+
+.labelRenderer {
+    font-family: pokemon-console;
+    font-size: 12px;
+    font-style: normal;
     position: absolute;
-    width: 50px;
-    z-index: 100;
+    z-index: 105;
 }
 
-.firstPokeball {
-    bottom: 0px;
-    left: 0px;
+.pvLabel {
+    bottom: 18px;
+    right: 52px;
 }
 
-.secondPokeball {
-    top: 0px;
-    right: 0px;
+.nameFirst {
+    font-size: 10px;
+    bottom: 51px;
+    left: 385px;
 }
 
-.firstPokemon {
-    bottom: 0px;
-    left: 125px;
+.nameSecond {
+    font-size: 10px;
+    top: 68px;
+    left: 50px;
 }
 
-.secondPokemon {
-    top: 100px;
-    right: 50px;
+.levelFirst {
+    bottom: 51px;
+    left: 500px;
+}
+
+.levelSecond {
+    top: 68px;
+    left: 165px;
+}
+
+.progressRenderer {
+    background-color: #e7dbe9;
+    z-index: 99;
+    position: absolute;
+}
+
+.pvProgressFirst {
+    height: 6px;
+    width: 93px;
+    bottom:38px;
+    left:452px;
+}
+
+.xpProgress {
+    height: 5px;
+    width: 125px;
+    bottom:8px;
+    left:420px;
+}
+
+.pvProgressSecond {
+    height: 6px;
+    width: 96px;
+    top:94px;
+    left:118px;
 }

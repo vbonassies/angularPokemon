@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Battle} from '../../shared/models/battle/battle';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
 import {PokemonType} from '../../shared/models/pokemon/pokemon-types';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Pokedex} from '../../shared/models/pokedex/pokedex';
 import {PokedexService} from '../../shared/services/pokedex.service';
 
@@ -14,7 +14,7 @@ export class BattleComponent implements OnInit {
 
   battle: Battle;
 
-  constructor(private route: ActivatedRoute, private pokedex: PokedexService) {
+  constructor(private route: ActivatedRoute, private router: Router, private pokedex: PokedexService) {
 
   }
     ngOnInit(): void {
@@ -22,6 +22,7 @@ export class BattleComponent implements OnInit {
         const userPokemon = this.pokedex.getPokemon(params.pokemonName);
         const computerPokemon = this.pokedex.getRandomPokemon(params.pokemonName);
         if (!userPokemon || !computerPokemon) {
+            this.router.navigate(['']);
             return;
         }
         this.battle = new Battle(

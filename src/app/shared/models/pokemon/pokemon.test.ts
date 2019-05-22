@@ -15,7 +15,7 @@ test('Pokemon is correctly constructed', () => {
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMoveFirst, pokemonMoveSecond], type);
   expect(newPokemon.Name).toBe(pokemonName);
   expect(newPokemon.Speed).toBe(pokemonSpeed);
-  expect(newPokemon.Pv).toBe(100);
+  expect(newPokemon.Hp).toBe(100);
   const gettedMoves = newPokemon.Moves;
   expect(gettedMoves.length).toBe(2);
   expect(gettedMoves).toContain(pokemonMoveFirst);
@@ -28,13 +28,13 @@ test('isDie should return true when PV <= 0', () => {
   const type = PokemonType.Electric;
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, null, type);
 
-  newPokemon.Pv = 0;
+  newPokemon.Hp = 0;
   expect(newPokemon.isDie()).toBe(true);
 
-  newPokemon.Pv = -1;
+  newPokemon.Hp = -1;
   expect(newPokemon.isDie()).toBe(true);
 
-  newPokemon.Pv = 1;
+  newPokemon.Hp = 1;
   expect(newPokemon.isDie()).toBe(false);
 });
 
@@ -58,7 +58,7 @@ test('undefined move must return false', () => {
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
   expect(newPokemon.applyMove(newPokemon, null, 1, emptyLog)).toBe(MoveResult.NoMove);
-  expect(newPokemon.Pv).toBe(100);
+  expect(newPokemon.Hp).toBe(100);
 });
 
 test('If generated accuracy is greater than move accuracy, applyMove must fail', () => {
@@ -70,7 +70,7 @@ test('If generated accuracy is greater than move accuracy, applyMove must fail',
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
   expect(newPokemon.applyMove(newPokemon, pokemonMove, 99, emptyLog)).toBe(MoveResult.MoveFails);
-  expect(newPokemon.Pv).toBe(100);
+  expect(newPokemon.Hp).toBe(100);
 });
 
 test('If generated accuracy is less than move accuracy, applyMove must fail, applyMove must success', () => {
@@ -81,9 +81,9 @@ test('If generated accuracy is less than move accuracy, applyMove must fail, app
   const pokemonMove = new Move('ATestMove', 'Test description', 15, 10);
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
-  const expectedNewPv = newPokemon.Pv - pokemonMove.Damage;
+  const expectedNewPv = newPokemon.Hp - pokemonMove.Damage;
   expect(newPokemon.applyMove(newPokemon, pokemonMove, 2, emptyLog)).toBe(MoveResult.MoveSuccess);
-  expect(newPokemon.Pv).toBe(expectedNewPv);
+  expect(newPokemon.Hp).toBe(expectedNewPv);
 });
 
 test('If generated accuracy is equals than move accuracy, applyMove must fail, applyMove must success', () => {
@@ -93,7 +93,7 @@ test('If generated accuracy is equals than move accuracy, applyMove must fail, a
   const pokemonMove = new Move('ATestMove', 'Test description', 15, 10);
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
-  const expectedNewPv = newPokemon.Pv - pokemonMove.Damage;
+  const expectedNewPv = newPokemon.Hp - pokemonMove.Damage;
   expect(newPokemon.applyMove(newPokemon, pokemonMove, 15, emptyLog)).toBe(MoveResult.MoveSuccess);
-  expect(newPokemon.Pv).toBe(expectedNewPv);
+  expect(newPokemon.Hp).toBe(expectedNewPv);
 });
