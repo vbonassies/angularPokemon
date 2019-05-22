@@ -1,7 +1,6 @@
 import { Pokemon } from '../pokemon/pokemon';
 import { Move } from '../move/move';
 import { MoveResult } from '../move/move-result';
-import { Error } from 'tslint/lib/error';
 import { AttackLog } from './attack-log';
 
 export class Battle {
@@ -38,7 +37,7 @@ export class Battle {
   public launchTurn(firstPokemonMoveName: string, secondPokemonMoveName: string, firstPlayerAccuracy: number,
                     secondPlayerAccuracy: number): Pokemon {
     if (this.isBattleEnded()) {
-      throw `This battle is already ended and was won by ${this.Winner.Name}`;
+      throw new Error(`This battle is already ended and was won by ${this.Winner.Name}`);
     }
     this.Round++;
     // this.logger(`Starting round ${this.Round}`);
