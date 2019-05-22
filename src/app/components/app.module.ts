@@ -19,7 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     BattleModule,
-    PokemonSelectionModule
+    PokemonSelectionModule,
     BattleModule,
     HttpClientModule
   ],
