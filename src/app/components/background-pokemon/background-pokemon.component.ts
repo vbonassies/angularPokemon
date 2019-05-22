@@ -1,81 +1,56 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { BackgroundPokemon } from '../../shared/models/background/background-pokemon';
-import { PokemonDirection } from '../../shared/models/background/pokemon-direction';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {BackgroundPokemon} from '../../shared/models/background/background-pokemon';
+import {PokemonDirection} from '../../shared/models/background/pokemon-direction';
 import Timer = NodeJS.Timer;
+import {SpriteService} from '../../shared/services/sprite.service';
 
 @Component({
-  selector: 'app-background-pokemon',
-  templateUrl: './background-pokemon.component.html',
-  styleUrls: ['./background-pokemon.component.css']
+    selector: 'app-background-pokemon',
+    templateUrl: './background-pokemon.component.html',
+    styleUrls: ['./background-pokemon.component.css']
 })
 export class BackgroundPokemonComponent implements OnInit, OnDestroy {
+    public activePokemons: Array<BackgroundPokemon> = [];
+    private interval: Timer;
 
-  public flyingBackgroundPokemons = [
-    'zubat',
-    'pidgeot',
-    'ledyba',
-    'fletchinder',
-    'noibat',
-    'noctowl',
-    'togetic',
-    'yanma',
-    'yanmega',
-    'wingull',
-    'hooh',
-    'mantine',
-    'talonflame',
-    'beautifly',
-    'charizard',
-    'skiploom'
-  ];
+    @Input() pokemon: BackgroundPokemon;
 
-  public activePokemons: Array<BackgroundPokemon> = [];
-  private interval: Timer;
+    constructor(public spriteService: SpriteService) {
+    }
 
-  @Input() pokemon: BackgroundPokemon;
+    private static getRandomHeight(): number {
+        return Math.floor(Math.random() * 60);
+    }
 
-  constructor() {
-  }
+    public static getDirection(random: () => number = Math.random): PokemonDirection {
+        return random() > 0.5 ? PokemonDirection.right : PokemonDirection.left;
+    }
 
-  private static getRandomHeight(): number {
-    return Math.floor(Math.random() * 60);
-  }
+    ngOnInit() {
+        this.interval = setInterval(() => {
+            if (document.hidden) {
+                return;
+            }
+            this.addPokemon();
+        }, 2000);
+    }
 
-  public static getDirection(random: () => number = Math.random): PokemonDirection {
-    return random() > 0.5 ? PokemonDirection.left : PokemonDirection.right;
-  }
+    private addPokemon(): void {
+        const pokemon = this.spriteService.getRandomFlyingPokemonName();
+        const direction = BackgroundPokemonComponent.getDirection();
+        const pokemonInstance = new BackgroundPokemon(pokemon, direction, BackgroundPokemonComponent.getRandomHeight());
 
-  public getRandomPokemon(random: () => number = Math.random): string {
-    const max = this.flyingBackgroundPokemons.length;
-    const index = Math.floor(random() * max);
-    return this.flyingBackgroundPokemons[index];
-  }
+        this.activePokemons.push(pokemonInstance);
+        setTimeout(() => {
+            const index = this.activePokemons.indexOf(pokemonInstance);
+            if (index >= 0) {
+                this.activePokemons.splice(index, 1);
+            }
+        }, 10000);
+    }
 
-  ngOnInit() {
-    this.interval = setInterval(() => {
-      if (document.hidden) {
-        return;
-      }
-      this.addPokemon();
-    }, 2000);
-  }
-
-  private addPokemon(): void {
-    const name = this.getRandomPokemon();
-    const direction = BackgroundPokemonComponent.getDirection();
-    const pokemonInstance = new BackgroundPokemon(name, direction, BackgroundPokemonComponent.getRandomHeight());
-
-    this.activePokemons.push(pokemonInstance);
-    setTimeout(() => {
-      const index = this.activePokemons.indexOf(pokemonInstance);
-      if (index >= 0) {
-        this.activePokemons.splice(index, 1);
-      }
-    }, 10000);
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.interval);
-    this.activePokemons = [];
-  }
+    ngOnDestroy(): void {
+        clearInterval(this.interval);
+        this.activePokemons = [];
+    }
 }
