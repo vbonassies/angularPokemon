@@ -20,21 +20,13 @@ export class BattleComponent implements OnInit {
     ngOnInit(): void {
       this.route.params.subscribe(params => {
         const userPokemon = this.pokedex.getPokemon(params.pokemonName);
-        console.log(params.pokemonName);
-        if (!userPokemon) {
+        const computerPokemon = this.pokedex.getRandomPokemon(params.pokemonName);
+        if (!userPokemon || !computerPokemon) {
             return;
         }
         this.battle = new Battle(
             userPokemon,
-            new Pokemon('Charmander', 10, [], PokemonType.Electric));
-        setInterval(() => {
-            this.battle.FirstPokemon.isAttacking = true;
-            this.battle.SecondPokemon.isAttacked = true;
-            setTimeout(() => {
-                this.battle.FirstPokemon.isAttacking = false;
-                this.battle.SecondPokemon.isAttacked = false;
-            }, 1000);
-        }, 2000);
+            computerPokemon);
       });
     }
 }

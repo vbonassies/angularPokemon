@@ -1,15 +1,14 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
-import {pokemonAnimation, pokeballAnimation} from './pokemon-animations';
-import {SpriteService} from '../../shared/services/sprite.service';
+import {pokemonAnimation, pokeballAnimation} from './life-animations';
 
 @Component({
   selector: 'app-pokemon-renderer',
-  templateUrl: './pokemon.component.html',
-  styleUrls: ['./pokemon.component.css'],
+  templateUrl: './life.component.html',
+  styleUrls: ['./life.component.css'],
   animations: [ pokemonAnimation, pokeballAnimation ]
 })
-export class PokemonComponent implements OnInit {
+export class LifeComponent implements OnInit {
   @Input()
   pokemon: Pokemon;
   @Input()
@@ -19,21 +18,21 @@ export class PokemonComponent implements OnInit {
 
   @ViewChild('pokemonRenderer') pokemonRenderer: ElementRef;
 
-  constructor(private sprite: SpriteService) {
-
-  }
-
   ngOnInit(): void {
       this.pokeballVisible = true;
-      this.pokemonSprite = this.sprite.getSpriteUri(this.pokemon.Name, this.isFirst);
+      this.pokemonSprite =
+          `https://img.pokemondb.net/sprites/black-white/anim/${this.isFirst ? 'back-' : ''}normal/${this.pokemon.Name.toLowerCase()}.gif`;
   }
 
   getPokemonAnimation(): string {
       if (this.pokemon.isAttacking) {
+          console.log(`${this.pokemon.Name} is attacking`);
           return this.isFirst ? 'attackingFirst' : 'attackingSecond';
       } else if (this.pokemon.isAttacked) {
+          console.log(`${this.pokemon.Name} is attacked`);
           return 'attacked';
       }
+      console.log(`${this.pokemon.Name} is sleeping`);
       return this.pokeballVisible ? 'initial' : 'sleep';
   }
 

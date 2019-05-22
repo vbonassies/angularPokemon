@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {BattleModule} from './battle/battle.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PokedexService} from '../shared/services/pokedex.service';
+import {SpriteService} from '../shared/services/sprite.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {PokedexService} from '../shared/services/pokedex.service';
     AppRoutingModule,
     BattleModule
   ],
-  providers: [PokedexService],
+  providers: [PokedexService, SpriteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

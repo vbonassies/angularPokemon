@@ -5,6 +5,7 @@ export const availablePokemons = [
     'Bulbasaur',
     'Venusaur',
     'Charmander',
+    'Magneton',
     'Blastoise',
     'Caterpie',
     'Sandshrew',

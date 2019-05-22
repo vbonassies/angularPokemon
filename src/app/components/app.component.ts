@@ -7,8 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
-      const preloadeds = document.querySelectorAll<HTMLElement>('.preloader');
-      preloadeds.forEach((element) => {
+      const preloader = document.querySelectorAll<HTMLElement>('.preloader');
+      preloader.forEach((element) => {
           element.classList.remove('preloader');
       });
   }
