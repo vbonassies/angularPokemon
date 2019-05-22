@@ -9,12 +9,12 @@ import {Battle} from '../../shared/models/battle/battle';
 export class BattleArenaComponent implements OnInit {
   public static ArenaNumber = 2;
 
-  @Input('battle')
+  @Input()
   battle: Battle;
-  choosenArena: string;
+  chooseArena: string;
 
   ngOnInit(): void {
       const randArena = Math.floor(Math.random() * BattleArenaComponent.ArenaNumber) + 1;
-      this.choosenArena = `/assets/pictures/arenas/${randArena}.png`;
+      this.chooseArena = `/assets/pictures/arenas/${randArena}.png`;
   }
 }

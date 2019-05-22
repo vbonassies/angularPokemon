@@ -8,7 +8,7 @@ import {Pokemon} from '../../shared/models/pokemon/pokemon';
 })
 export class MoveSelectorComponent implements OnInit {
 
-  @Input('pokemon')
+  @Input()
   pokemon: Pokemon;
 
   ngOnInit(): void {

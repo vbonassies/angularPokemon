@@ -4,8 +4,7 @@ export class Move {
     public Accuracy: number;
     public Damage: number;
 
-    constructor(name: string, description: string, accuracy: number, damage: number)
-    {
+    constructor(name: string, description: string, accuracy: number, damage: number) {
         this.Name = name;
         this.Description = description;
         this.Accuracy = accuracy;
