@@ -39,9 +39,9 @@ export class Pokemon {
         } else { return this.Type === PokemonType.Electric && secondPokemonType === PokemonType.Water; }
     }
 
-    public applyMove(enemy: Pokemon, moveToExecute: Move, generatedAccuracy: number): MoveResult {
+    public applyMove(enemy: Pokemon, moveToExecute: Move, generatedAccuracy: number, logger: (log: string) => void): MoveResult {
         if (!moveToExecute || !this.hasMove(moveToExecute)) {
-            console.log(`${this.Name} has nothing to do..`);
+            logger(`${this.Name} has nothing to do..`);
             return MoveResult.NoMove;
         }
         let finalPv;
@@ -58,14 +58,12 @@ export class Pokemon {
                 finalPv = 0;
             }
             enemy.Pv = finalPv;
-            setTimeout(() => {
-                this.isAttacking = false;
-                enemy.isAttacked = false;
-            }, 1000);
-            console.log(`${this.Name} has attacked with ${moveToExecute.Name}!. ${moveToExecute.Damage} infliged damage`);
+            this.isAttacking = false;
+            enemy.isAttacked = false;
+            logger(`${this.Name} has attacked with ${moveToExecute.Name}!. ${moveToExecute.Damage} infliged damage`);
             return MoveResult.MoveSuccess;
         }
-        console.log(`${this.Name} fails its attack..`);
+        logger(`${this.Name} fails its attack..`);
         return MoveResult.MoveFails;
     }
 }
