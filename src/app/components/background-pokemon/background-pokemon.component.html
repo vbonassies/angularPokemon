@@ -1,0 +1,2 @@
+<img *ngFor="let poke of activePokemons" [ngClass]="poke.Direction.toString()" [ngStyle]="{'top':poke.yPosition+'%'}"
+     src="https://play.pokemonshowdown.com/sprites/xyani/{{poke.Name}}.gif"/>

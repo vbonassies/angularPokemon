@@ -1,0 +1,69 @@
+:host {
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: -10;
+}
+
+img {
+    position: absolute;
+    -webkit-animation-iteration-count: 1; /* Safari 4.0 - 8.0 */
+    animation-iteration-count: 1;
+}
+
+img.Right {
+    right: -200px;
+    -webkit-animation: backgroundPokemonMoveRightLeft 10s linear; /* Safari 4.0 - 8.0 */
+    animation: backgroundPokemonMoveRightLeft 10s linear;
+}
+
+img.Left {
+    left: -200px;
+    -webkit-animation: backgroundPokemonMoveLeftRight 10s linear; /* Safari 4.0 - 8.0 */
+    animation: backgroundPokemonMoveLeftRight 10s linear;
+
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+@-webkit-keyframes backgroundPokemonMoveRightLeft {
+    from {
+        right: -200px;;
+    }
+    to {
+        right: calc(100% + 200px)
+    }
+}
+
+@keyframes backgroundPokemonMoveRightLeft {
+    from {
+        right: -200px;
+    }
+    to {
+        right: calc(100% + 200px)
+    }
+}
+
+@-webkit-keyframes backgroundPokemonMoveLeftRight {
+    from {
+        left: -200px;;
+    }
+    to {
+        left: calc(100% + 200px)
+    }
+}
+
+@keyframes backgroundPokemonMoveLeftRight {
+    from {
+        left: -200px;
+    }
+    to {
+        left: calc(100% + 200px)
+    }
+}
