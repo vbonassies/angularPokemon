@@ -55,4 +55,8 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
         this.pokedex.applyPokemonModifications(pokemon);
         this.storage.saveUserPokemon(pokemon);
     }
+
+    getPotionTitle(poke: Pokemon): string {
+        return `Use a ${poke.getHpPercents() === 0 ? 'hyper' : 'maxi'} potion`;
+    }
 }

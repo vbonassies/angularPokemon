@@ -1,4 +1,4 @@
-.card-body{
+.card-body {
     padding: 10px 0.25rem;
 }
 
@@ -17,7 +17,7 @@
     display: inline-block;
 }
 
-.card-title{
+.card-title {
     margin-bottom: 0;
 }
 
@@ -25,7 +25,8 @@
     background-color: #e11c1c;
     border-color: black;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #ff1c1c;
 }
 
@@ -56,6 +57,12 @@ h5, button, span {
     right: -15px;
     padding: 0;
     height: 30px;
+}
+
+.potionDiv {
+    position: absolute;
+    right: 5px;
+    margin-top: -2px;
 }
 
 .potionDiv:hover {
