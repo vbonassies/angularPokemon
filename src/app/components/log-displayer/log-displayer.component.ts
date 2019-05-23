@@ -5,7 +5,7 @@ import {AttackLog} from '../../shared/models/battle/attack-log';
 @Component({
     selector: 'app-log-displayer',
     templateUrl: './log-displayer.component.html',
-    styleUrls: ['./log-displayer.component.scss']
+    styleUrls: ['./log-displayer.component.scss'],
 })
 export class LogDisplayerComponent {
 
