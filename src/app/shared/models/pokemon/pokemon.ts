@@ -9,7 +9,7 @@ export class Pokemon {
   public Speed: number;
   public Hp: number;
   public MaxHp: number;
-  private refHp: number;
+  public ReferenceHp: number;
   public XpBeforeNextLevel: number;
   public Xp: number;
   public Level: number;
@@ -24,7 +24,7 @@ export class Pokemon {
   constructor(pokemonName: string, speed: number, referenceHp: number, level: number, types: PokemonType[]) {
     this.Name = pokemonName;
     this.Speed = speed;
-    this.refHp = referenceHp;
+    this.ReferenceHp = referenceHp;
     this.setLevel(level);
     this.Types = types;
     this.Xp = 0;
@@ -33,7 +33,7 @@ export class Pokemon {
   }
 
   setLevel(newLevel: number) {
-    this.MaxHp = Math.ceil(this.refHp * (newLevel / 20)) + this.refHp;
+    this.MaxHp = Math.ceil(this.ReferenceHp * (newLevel / 20)) + this.ReferenceHp;
     this.Hp = this.MaxHp;
     this.Level = newLevel;
   }

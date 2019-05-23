@@ -92,7 +92,7 @@ export class PokedexService {
         if (!pokemon) {
             return null;
         }
-        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, pokemon.Level, pokemon.Types);
+        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.ReferenceHp, pokemon.Level, pokemon.Types);
         newPokemon.Hp = pokemon.Hp;
         newPokemon.Xp = pokemon.Xp;
         newPokemon.Moves = [...pokemon.Moves];
@@ -106,7 +106,7 @@ export class PokedexService {
         if (!pokemon) {
             return null;
         }
-        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, givenLevel, pokemon.Types);
+        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.ReferenceHp, givenLevel, pokemon.Types);
         newPokemon.Moves = [...pokemon.Moves];
         return newPokemon;
     }
