@@ -1,17 +1,17 @@
 import {TestBed, async} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {BackgroundPokemonModule} from './components/background-pokemon/background-pokemon.module';
+import {BackgroundPokemonComponent} from './components/background-pokemon/background-pokemon.component';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
-                BackgroundPokemonModule
             ],
             declarations: [
                 AppComponent,
+                BackgroundPokemonComponent
             ],
         }).compileComponents();
     }));

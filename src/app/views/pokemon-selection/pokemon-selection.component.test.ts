@@ -15,7 +15,7 @@ import {MockHelper} from '../../../test-helpers/mock-helper';
 
 const testRoutes: Routes = [
     {
-        path: 'battle/:pokemonName',
+        path: 'battle-arena/:pokemonName',
         component: DummyComponent
     }
 ];
@@ -87,7 +87,7 @@ describe('PokemonSelectionComponent', () => {
             expect(buttons.length).toBe(1);
             buttons[0].click();
             fixture.whenStable().then(() => {
-                expect(location.path).toEqual('/battle' + firstPokemonExpectedPokemon.Name);
+                expect(location.path).toEqual('/battle-arena' + firstPokemonExpectedPokemon.Name);
             });
 
             component.ngOnDestroy();

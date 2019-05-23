@@ -27,9 +27,6 @@ import {BackgroundPokemonComponent} from './components/background-pokemon/backgr
         BattleModule,
         HttpClientModule
     ],
-    exports: [
-        BackgroundPokemonComponent,
-    ],
     providers: [PokedexService, SpriteService, DateService, PokeApiService],
     bootstrap: [AppComponent]
 })

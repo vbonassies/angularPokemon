@@ -31,8 +31,8 @@ describe('LogDisplayerComponent', () => {
     }));
 
     it('Should render damage message correctly', () => {
-        component.attackLogs.push(AttackLog.attack(poke1, poke2, pokemonMove, 10));
-        component.attackLogs.push(AttackLog.attack(poke2, poke1, pokemonMove, 20));
+        component.attackLogs.push(AttackLog.attack(poke1, poke2, pokemonMove, 10, false));
+        component.attackLogs.push(AttackLog.attack(poke2, poke1, pokemonMove, 20, false));
 
         fixture.detectChanges();
 
@@ -81,4 +81,15 @@ describe('LogDisplayerComponent', () => {
         expect(log.textContent).toContain(message);
     });
 
+    it('Should render critical correcyly', () => {
+        component.attackLogs.push(AttackLog.attack(poke1, poke2, pokemonMove, 10, true));
+
+        fixture.detectChanges();
+
+        const logs = compiled.querySelectorAll('.attackLog span');
+        expect(logs.length).toBe(2);
+        expect(logs[0].textContent).toContain('Attacker attacks Enemy using ATestMove dealing 10 damage');
+        expect(logs[1].textContent).toContain('It\'s super effective!!!');
+        expect(logs[1].classList).toContain('span-critic');
+    });
 });
