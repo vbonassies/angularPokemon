@@ -12,7 +12,7 @@
                 <app-pokemon-renderer *ngIf="battle.FirstPokemon" [pokemon]="battle.FirstPokemon" [isFirst]="true"></app-pokemon-renderer>
                 <app-pokemon-renderer *ngIf="battle.SecondPokemon" [pokemon]="battle.SecondPokemon" [isFirst]="false"></app-pokemon-renderer>
             </div>
-            <app-user-io [logEvent]="logEvent" [selectedMoveEvent]="selectedMoveEvent" [moveSelectRequire]="shouldUserSelectMove" [pokemon]="battle.FirstPokemon" ></app-user-io>
+            <app-user-io [logEvent]="logEvent" [exitSelectRequire]="shouldUserSelectForExit" [selectedMoveEvent]="selectedMoveEvent" [moveSelectRequire]="shouldUserSelectMove" [pokemon]="battle.FirstPokemon" ></app-user-io>
         </div>
     </div>
 </div>

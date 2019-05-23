@@ -21,6 +21,9 @@ export class UserIOComponent implements OnInit {
   moveSelectRequire: boolean;
 
   @Input()
+  exitSelectRequire: boolean;
+
+  @Input()
   selectedMoveEvent: BehaviorSubject<Move>;
 
   logs: AttackLog[] = [];

@@ -22,6 +22,7 @@ export class BattleArenaComponent implements OnInit {
   wasSplashDisplayed: boolean; // put it to true to disable splash screen
 
   shouldUserSelectMove = false;
+  shouldUserSelectForExit = false;
   selectedMoveEvent = new BehaviorSubject<Move>(undefined);
   logObservable = new BehaviorSubject<AttackLog>(undefined);
   logEvent: Observable<AttackLog> = this.logObservable.asObservable();
@@ -56,6 +57,7 @@ export class BattleArenaComponent implements OnInit {
         } else {
           this.storage.saveUserPokemon(this.battle.FirstPokemon);
           this.pokedex.applyPokemonModifications(this.battle.FirstPokemon);
+          this.shouldUserSelectForExit = true;
         }
       });
       this.turnLoop();

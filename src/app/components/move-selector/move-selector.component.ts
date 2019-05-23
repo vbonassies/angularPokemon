@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {PokedexService} from '../../shared/services/pokedex.service';
 import {StorageService} from '../../shared/services/storage.service';
+import {addListener} from 'cluster';
 
 @Component({
   selector: 'app-move-selector',
@@ -22,6 +23,9 @@ export class MoveSelectorComponent implements OnInit {
   moveSelectRequire: boolean;
 
   @Input()
+  exitSelectRequire: boolean;
+
+  @Input()
   selectedMoveEvent: BehaviorSubject<Move>;
 
   @Output()
@@ -34,6 +38,7 @@ export class MoveSelectorComponent implements OnInit {
 
   onMoveSelected(move: Move): void {
     this.selectedMoveEvent.next(move);
+    this.selectType = 'mode';
   }
 
   onFightSelect() {
@@ -58,4 +63,8 @@ export class MoveSelectorComponent implements OnInit {
     onBackSelected() {
       this.selectType = 'mode';
     }
+
+  onExit() {
+    this.router.navigate(['']);
+  }
 }
