@@ -33,6 +33,8 @@ export class PokemonComponent implements OnInit {
           return this.isFirst ? 'attackingFirst' : 'attackingSecond';
       } else if (this.pokemon.isAttacked) {
           return 'attacked';
+      } else if (this.pokemon.isDie()) {
+          return 'isDead';
       }
       return this.pokeballVisible ? 'initial' : 'sleep';
   }

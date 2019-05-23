@@ -1,6 +1,9 @@
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 
 export const pokemonAnimation = trigger('pokemonAnimation', [
+    state('isDead', style({
+        opacity: 0
+    })),
     state('initial', style({
         opacity: 0
     })),
@@ -33,6 +36,9 @@ export const pokemonAnimation = trigger('pokemonAnimation', [
             style({ opacity: 1 }),
             style({ opacity: 0.3 })
         ]))
+    ]),
+    transition('* => isDead', [
+        animate('600ms', style({opacity: 0}))
     ]),
     transition('initial => sleep', [
         animate('250ms', keyframes([
