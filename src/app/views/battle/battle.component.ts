@@ -18,8 +18,9 @@ export class BattleComponent implements OnInit {
 
     public static getEnemyLevel(userPokemon: Pokemon, rand: () => number = Math.random) {
         const maxOpponentLevel = Math.min(userPokemon.Level + 5, 99);
+        const minOpponentLevel = Math.max(userPokemon.Level - 5, 1);
         const randomLevel = Math.floor(rand() * maxOpponentLevel);
-        return Math.max(randomLevel, userPokemon.Level - 5);
+        return Math.max(randomLevel, minOpponentLevel);
     }
 
     ngOnInit(): void {
