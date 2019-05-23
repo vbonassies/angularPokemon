@@ -7,6 +7,8 @@
     display: block;
     margin-bottom: 30px;
     text-align: center;
+    border-color: #ffe165;
+    border-width: 5px;
 }
 
 .pokesprite {
@@ -19,6 +21,19 @@
     margin-bottom: 0;
 }
 
+.btn {
+    background-color: #ff1c1c;
+    border-color: black;
+}
+
 h1 {
     font-family: pokemon-title;
+}
+
+.pokeball {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    padding: 0;
+    height: 30px;
 }
