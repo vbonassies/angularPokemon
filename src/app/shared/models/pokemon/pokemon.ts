@@ -5,6 +5,8 @@ import {AttackLog} from '../battle/attack-log';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 export class Pokemon {
+  public static DamageSensivity = 5;
+
   public Name: string;
   public Speed: number;
   public Hp: number;
@@ -87,16 +89,16 @@ export class Pokemon {
     if (generatedAccuracy <= moveToExecute.Accuracy) {
       this.isAttacking = true;
       enemy.isAttacked = true;
-      finalPv = enemy.Hp - Math.ceil(moveToExecute.Power * (this.Level / 100));
+      const damage = Math.ceil(moveToExecute.Power * (this.Level / 100)) + Pokemon.DamageSensivity;
+      finalPv = enemy.Hp - damage;
       if (this.isStrongAgainstEnemy(enemy.Types)) {
-        finalPv *= 2;
+        finalPv -= damage;
       }
       if (finalPv <= 0) {
         finalPv = 0;
       }
-      const damageDealt = enemy.Hp - finalPv;
       enemy.Hp = finalPv;
-      logger(AttackLog.attack(this, enemy, moveToExecute, damageDealt, this.isCritic));
+      logger(AttackLog.attack(this, enemy, moveToExecute, damage, this.isCritic));
       setTimeout(() => {
         this.isAttacking = false;
         enemy.isAttacked = false;
