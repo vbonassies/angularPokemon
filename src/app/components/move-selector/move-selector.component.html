@@ -17,6 +17,7 @@
             <span *ngIf="pokemon.Moves[1]" (click)="onMoveSelected(pokemon.Moves[1])" (mouseleave)="cursor=''" (mouseenter)="cursor='move2'"><span *ngIf="cursor=='move2'">&gt;</span>{{pokemon.Moves[1].Name}}</span>
             <span *ngIf="pokemon.Moves[2]" (click)="onMoveSelected(pokemon.Moves[2])" (mouseleave)="cursor=''" (mouseenter)="cursor='move3'"><span *ngIf="cursor=='move3'">&gt;</span>{{pokemon.Moves[2].Name}}</span>
             <span *ngIf="pokemon.Moves[3]" (click)="onMoveSelected(pokemon.Moves[3])" (mouseleave)="cursor=''" (mouseenter)="cursor='move4'"><span *ngIf="cursor=='move4'">&gt;</span>{{pokemon.Moves[3].Name}}</span>
+            <span (click)="onBackSelected()" (mouseleave)="cursor=''" (mouseenter)="cursor='back'"><span *ngIf="cursor=='back'">&gt;</span>.. back ..</span>
         </div>
     </div>
 </div>

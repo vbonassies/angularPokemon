@@ -50,4 +50,8 @@ export class MoveSelectorComponent implements OnInit {
   onRun() {
     this.router.navigate(['']);
   }
+
+    onBackSelected() {
+      this.selectType = 'mode';
+    }
 }
