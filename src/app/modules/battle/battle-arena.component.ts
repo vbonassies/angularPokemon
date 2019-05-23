@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Battle} from '../../shared/models/battle/battle';
 import {Move} from '../../shared/models/move/move';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {AttackLog} from "../../shared/models/battle/attack-log";
 
 @Component({
   selector: 'app-battle-arena',
@@ -19,6 +20,8 @@ export class BattleArenaComponent implements OnInit {
 
   shouldUserSelectMove: boolean;
   selectedMoveEvent = new BehaviorSubject<Move>(undefined);
+  logObservable = new BehaviorSubject<AttackLog>(undefined);
+  logEvent: Observable<AttackLog> = this.logObservable.asObservable();
 
   ngOnInit(): void {
       const randArena = Math.floor(Math.random() * BattleArenaComponent.ArenaNumber) + 1;
@@ -32,7 +35,7 @@ export class BattleArenaComponent implements OnInit {
         const userMoveName = userMove ? userMove.Name : undefined;
         const userAccuracy = Math.floor(Math.random() * 100) + 1;
         const computerAccuracy = Math.floor(Math.random() * 100) + 1;
-        this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy);
+        this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy, this.logObservable);
         if (!this.battle.isBattleEnded()) {
           this.turnLoop();
         }

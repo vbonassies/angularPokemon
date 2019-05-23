@@ -25,7 +25,13 @@ export class UserIOComponent implements OnInit {
 
   logs: AttackLog[] = [];
 
+  @Input()
+  logEvent: Observable<AttackLog>;
+
   ngOnInit(): void {
+    this.logEvent.subscribe(logCombat => {
+      this.logs.push(logCombat);
+    });
   }
 
   onLogged(log: string) {

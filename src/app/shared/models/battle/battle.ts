@@ -2,13 +2,13 @@ import { Pokemon } from '../pokemon/pokemon';
 import { Move } from '../move/move';
 import { MoveResult } from '../move/move-result';
 import { AttackLog } from './attack-log';
+import {BehaviorSubject} from 'rxjs';
 
 export class Battle {
   public FirstPokemon: Pokemon;
   public SecondPokemon: Pokemon;
   public Round: number;
   public Winner: Pokemon;
-  public logs: AttackLog[] = [];
 
   constructor(firstPokemon: Pokemon, secondPokemon: Pokemon) {
     this.FirstPokemon = firstPokemon;
@@ -30,31 +30,29 @@ export class Battle {
     return rightPokemon.Moves.find(mv => mv.Name === rightMoveName);
   }
 
-  public logger(log: AttackLog): void {
-    this.logs.push(log);
-  }
-
   public launchTurn(firstPokemonMoveName: string, secondPokemonMoveName: string, firstPlayerAccuracy: number,
-                    secondPlayerAccuracy: number): Pokemon {
+                    secondPlayerAccuracy: number, logger: BehaviorSubject<AttackLog>): Pokemon {
     if (this.isBattleEnded()) {
       throw new Error(`This battle is already ended and was won by ${this.Winner.Name}`);
     }
     this.Round++;
-    // this.logger(`Starting round ${this.Round}`);
+    logger.next(AttackLog.message(`Starting round ${this.Round}`));
     const firstAttacker = this.getNextTurnFirstAttacker();
     const secondAttacker = this.FirstPokemon === firstAttacker ? this.SecondPokemon : this.FirstPokemon;
     const firstAttackerMove = this.getMove(firstAttacker, firstPokemonMoveName, secondPokemonMoveName);
     const secondAttackerMove = this.getMove(secondAttacker, firstPokemonMoveName, secondPokemonMoveName);
-    if (firstAttacker.applyMove(secondAttacker, firstAttackerMove, firstPlayerAccuracy, (log) => this.logger(log)) === MoveResult.MoveSuccess
+    // tslint:disable-next-line:max-line-length
+    if (firstAttacker.applyMove(secondAttacker, firstAttackerMove, firstPlayerAccuracy, (log) => logger.next(log)) === MoveResult.MoveSuccess
     && secondAttacker.isDie()) {
       this.Winner = firstAttacker;
-      this.logger(AttackLog.kill(firstAttacker, secondAttacker));
+      logger.next(AttackLog.kill(firstAttacker, secondAttacker));
       return firstAttacker;
     }
-    if (secondAttacker.applyMove(firstAttacker, secondAttackerMove, secondPlayerAccuracy, (log) => this.logger(log)) === MoveResult.MoveSuccess
+    // tslint:disable-next-line:max-line-length
+    if (secondAttacker.applyMove(firstAttacker, secondAttackerMove, secondPlayerAccuracy, (log) => logger.next(log)) === MoveResult.MoveSuccess
     && firstAttacker.isDie()) {
       this.Winner = secondAttacker;
-      this.logger(AttackLog.kill(firstAttacker, secondAttacker));
+      logger.next(AttackLog.kill(firstAttacker, secondAttacker));
       return secondAttacker;
     }
     return null;

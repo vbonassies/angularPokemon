@@ -8,5 +8,7 @@ export enum PokemonType {
     ground = 'Ground',
     normal = 'Normal',
     poison = 'Poison',
-    fairy = 'Fairy'
+    fairy = 'Fairy',
+    psychic = 'Psychic',
+    dragon = 'Dragon'
 }

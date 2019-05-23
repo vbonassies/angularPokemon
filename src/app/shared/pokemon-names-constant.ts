@@ -23,7 +23,10 @@ export const availablePokemons = [
   'Mantine',
   'Beautifly',
   'Charizard',
-  'Skiploom'
+  'Skiploom',
+  'Mewtwo',
+  'Mew',
+  'Dragonair'
 ];
 
 export const backgroundAvailableFlyingPokemons = [
