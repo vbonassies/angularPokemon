@@ -50,14 +50,18 @@ export class BattleArenaComponent implements OnInit {
           const userMoveName = userMove ? userMove.Name : undefined;
           const userAccuracy = Math.floor(Math.random() * 100) + 1;
           const computerAccuracy = Math.floor(Math.random() * 100) + 1;
-          this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy, this.logObservable);
-        }
-        if (!this.battle.isBattleEnded()) {
-          this.turnLoop();
-        } else {
-          this.storage.saveUserPokemon(this.battle.FirstPokemon);
-          this.pokedex.applyPokemonModifications(this.battle.FirstPokemon);
-          this.shouldUserSelectForExit = true;
+          this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy, this.logObservable)
+              .subscribe((res) => {
+                if (res) {
+                  if (!this.battle.isBattleEnded()) {
+                    this.turnLoop();
+                  } else {
+                    this.storage.saveUserPokemon(this.battle.FirstPokemon);
+                    this.pokedex.applyPokemonModifications(this.battle.FirstPokemon);
+                    this.shouldUserSelectForExit = true;
+                  }
+                }
+              });
         }
       });
       this.turnLoop();

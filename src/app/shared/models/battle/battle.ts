@@ -2,7 +2,7 @@ import {Pokemon} from '../pokemon/pokemon';
 import {Move} from '../move/move';
 import {MoveResult} from '../move/move-result';
 import {AttackLog} from './attack-log';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 export class Battle {
   public FirstPokemon: Pokemon;
@@ -31,10 +31,11 @@ export class Battle {
   }
 
   public launchTurn(firstPokemonMoveName: string, secondPokemonMoveName: string, firstPlayerAccuracy: number,
-                    secondPlayerAccuracy: number, logger: BehaviorSubject<AttackLog>): void {
+                    secondPlayerAccuracy: number, logger: BehaviorSubject<AttackLog>): Observable<boolean> {
     if (this.isBattleEnded()) {
       throw new Error(`This battle is already ended and was won by ${this.Winner.Name}`);
     }
+    const observableResult = new BehaviorSubject<boolean>(false);
     this.Round++;
     logger.next(AttackLog.message(`Starting round ${this.Round}`));
     const firstAttacker = this.getNextTurnFirstAttacker();
@@ -48,7 +49,9 @@ export class Battle {
       }
       if (result === MoveResult.MoveSuccess && secondAttacker.isDie()) {
         this.Winner = firstAttacker;
+        observableResult.next(true);
         logger.next(AttackLog.kill(firstAttacker, secondAttacker));
+        return;
       }
       secondAttacker.applyMove(firstAttacker, secondAttackerMove, secondPlayerAccuracy,
           (log) => logger.next(log)).subscribe(res => {
@@ -59,7 +62,9 @@ export class Battle {
           this.Winner = secondAttacker;
           logger.next(AttackLog.kill(firstAttacker, secondAttacker));
         }
+        observableResult.next(true);
       });
     });
+    return observableResult;
   }
 }

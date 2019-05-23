@@ -22,7 +22,9 @@
             </div>
         </div>
         <div *ngIf="exitSelectRequire">
-            <span (click)="onExit()" (mouseleave)="cursor=''" (mouseenter)="cursor='exit'"><span *ngIf="cursor=='exit'">&gt;</span>POKEDEX</span>
+            <div>
+                <span (click)="onExit()" (mouseleave)="cursor=''" (mouseenter)="cursor='exit'"><span *ngIf="cursor=='exit'">&gt;</span>POKEDEX</span>
+            </div>
         </div>
     </div>
 </div>
