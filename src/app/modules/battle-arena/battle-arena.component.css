@@ -7,11 +7,16 @@
 }
 
 .powerLed {
+    width: 35px;
+    height: 35px;
+}
+
+.powerLed > img {
     position: absolute;
-    top:10px;
-    left:10px;
-    width: 50px;
-    height: 50px;
+    top:143px;
+    left:-133px;
+    width: 35px;
+    height: 35px;
     z-index: 10000;
 }
 
@@ -36,6 +41,7 @@
 }
 
 .gameboy-sceen {
+    position: relative;
     display: inline-block;
     margin-top: 170px;
     background-color: #fff6ff;
