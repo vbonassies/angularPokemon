@@ -9,18 +9,18 @@ export const pokemonAnimation = trigger('pokemonAnimation', [
     })),
     transition('* => attackingFirst', [
         animate('250ms ease', style({
-            transform: 'translate(100%, -105%)'
+            transform: 'scale(2) translate(40px, -60px)'
         })),
         animate('500ms ease', style({
-            transform: 'translate(0%, 0%)'
+            transform: 'scale(2) translate(-50%, 0%)'
         }))
     ]),
     transition('* => attackingSecond', [
         animate('250ms ease', style({
-            transform: 'translate(-100%, 105%)'
+            transform: 'scale(2) translate(-40px, 60px)'
         })),
         animate('500ms ease', style({
-            transform: 'translate(0%, 0%)'
+            transform: 'scale(2) translate(50%, 0%)'
         }))
     ]),
     transition('* => attacked', [
