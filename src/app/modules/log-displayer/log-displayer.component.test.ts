@@ -27,6 +27,7 @@ describe('LogDisplayerComponent', () => {
         component = fixture.debugElement.componentInstance;
         compiled = fixture.debugElement.nativeElement;
 
+        component.attackLogs = [];
     }));
 
     it('Should render damage message correctly', () => {
@@ -68,6 +69,16 @@ describe('LogDisplayerComponent', () => {
         const log = compiled.querySelector('.attackLog');
         expect(log.textContent).toContain('Attacker failed to use ATestMove');
         expect(log.classList).toContain('fail');
+    });
+
+    it('Should render message correctly', () => {
+        const message = 'My awesome message';
+        component.attackLogs.push(AttackLog.message(message));
+
+        fixture.detectChanges();
+
+        const log = compiled.querySelector('.attackLog');
+        expect(log.textContent).toContain(message);
     });
 
 });
