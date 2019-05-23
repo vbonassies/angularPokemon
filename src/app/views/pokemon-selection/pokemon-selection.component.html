@@ -9,6 +9,7 @@
                 <img class="card-img-top pokesprite" [src]="getPokeSprite(poke)" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><b>{{poke.Name}}</b></h5>
+                    <h5 class="card-title">Level {{poke.Level}}</h5>
                     <span class="pokeTypes">{{getPokemonTypes(poke)}}</span>
                     <hr/>
                     <div class="potionDiv" *ngIf="poke.getHpPercents() < 100" (click)="regeneratePokemon(poke)" [title]="getPotionTitle(poke)">

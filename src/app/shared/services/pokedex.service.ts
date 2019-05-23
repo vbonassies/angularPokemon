@@ -45,7 +45,7 @@ export class PokedexService {
                     return 1;
                 }
                 return 0;
-            })
+            });
             this.isInitialized.next(true);
         });
     }
@@ -78,9 +78,20 @@ export class PokedexService {
         }
 
         return forkJoin(moveDetailsObservables).pipe(map(details => {
+            let count = 0;
             for (const detail of details) {
                 const move = new Move(detail.name, detail.accuracy, detail.power);
                 pokemonItem.Moves.push(move);
+                count++;
+                if (pokemonItem.Level < 25 && count === 1) {
+                    break;
+                }
+                if (pokemonItem.Level >= 25 && pokemonItem.Level < 50 && count === 2) {
+                    break;
+                }
+                if (pokemonItem.Level >= 50 && pokemonItem.Level < 75 && count === 3) {
+                    break;
+                }
             }
             this.pokemons.push(pokemonItem);
         }));
