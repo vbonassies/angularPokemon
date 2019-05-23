@@ -47,6 +47,10 @@ export class Pokemon {
           return true;
         } else if (typeFirstPokemon === PokemonType.flying && typeSecondPokemon === PokemonType.grass) {
           return true;
+        } else if (typeFirstPokemon === PokemonType.ground && typeSecondPokemon === PokemonType.poison) {
+          return true;
+        } else if (typeFirstPokemon === PokemonType.bug && typeSecondPokemon === PokemonType.grass) {
+          return true;
         } else {
           return typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water;
         }

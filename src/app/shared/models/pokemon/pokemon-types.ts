@@ -3,5 +3,10 @@ export enum PokemonType {
     fire = 'Fire',
     water = 'Water',
     grass = 'Grass',
-    flying = 'Flying'
+    flying = 'Flying',
+    bug = 'Bug',
+    ground = 'Ground',
+    normal = 'Normal',
+    poison = 'Poison',
+    fairy = 'Fairy'
 }
