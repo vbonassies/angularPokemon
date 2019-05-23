@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { BattleComponent } from './battle.component';
 import {BattleRoutingModule} from './battle-routing.module';
-import {BattleArenaModule} from '../../modules/battle/battle-arena.module';
+import {BattleArenaModule} from '../../modules/battle-arena/battle-arena.module';
 
 @NgModule({
   declarations: [

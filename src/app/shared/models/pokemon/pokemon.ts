@@ -8,6 +8,7 @@ export class Pokemon {
   public Speed: number;
   public Hp: number;
   public MaxHp: number;
+  private refHp: number;
   public XpBeforeNextLevel: number;
   public Xp: number;
   public Level: number;
@@ -18,14 +19,19 @@ export class Pokemon {
   public isAttacking = false;
 
 
-  constructor(pokemonName: string, speed: number, maxHp: number, level: number, types: PokemonType[]) {
+  constructor(pokemonName: string, speed: number, referenceHp: number, level: number, types: PokemonType[]) {
     this.Name = pokemonName;
     this.Speed = speed;
-    this.MaxHp = maxHp;
-    this.Hp = maxHp;
-    this.Level = level;
+    this.refHp = referenceHp;
+    this.setLevel(level);
     this.Types = types;
     this.Moves = [];
+  }
+
+  setLevel(newLevel: number) {
+    this.MaxHp = Math.ceil(this.refHp * (newLevel / 20)) + this.refHp;
+    this.Hp = this.MaxHp;
+    this.Level = newLevel;
   }
 
   public isDie(): boolean {
@@ -67,15 +73,14 @@ export class Pokemon {
     if (generatedAccuracy <= moveToExecute.Accuracy) {
       this.isAttacking = true;
       enemy.isAttacked = true;
+      finalPv = enemy.Hp - Math.ceil(moveToExecute.Power * (this.Level / 100));
       if (this.isStrongAgainstEnemy(enemy.Types)) {
-        finalPv = enemy.Hp - moveToExecute.Power * 2;
-      } else {
-        finalPv = enemy.Hp - moveToExecute.Power;
+        finalPv *= 2;
       }
       if (finalPv <= 0) {
         finalPv = 0;
       }
-      const damageDealt = finalPv - enemy.Hp;
+      const damageDealt = enemy.Hp - finalPv;
       enemy.Hp = finalPv;
       this.isAttacking = false;
       enemy.isAttacked = false;

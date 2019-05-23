@@ -75,7 +75,7 @@ test('Test if second pokemon win during launchTurn', () => {
     expect(battle.Winner).toBe(pikaUlti);
 });
 
-test('Test that launchTurn on ended battle throws', () => {
+test('Test that launchTurn on ended battle-arena throws', () => {
     const logObservable = new BehaviorSubject<AttackLog>(undefined);
 
     const battle = new Battle(carapuce, pikachu);
@@ -86,7 +86,7 @@ test('Test that launchTurn on ended battle throws', () => {
         .toThrowError(`This battle is already ended and was won by ${carapuce.Name}`);
 });
 
-test('Test is battle ended if winner is set', () => {
+test('Test is battle-arena ended if winner is set', () => {
     const battle = new Battle(carapuce, pikachu);
     expect(battle.isBattleEnded()).toBe(false);
     battle.Winner = carapuce;

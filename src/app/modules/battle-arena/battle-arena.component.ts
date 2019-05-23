@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Battle} from '../../shared/models/battle/battle';
 import {Move} from '../../shared/models/move/move';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AttackLog} from "../../shared/models/battle/attack-log";
+import {AttackLog} from '../../shared/models/battle/attack-log';
 
 @Component({
   selector: 'app-battle-arena',
@@ -18,7 +18,7 @@ export class BattleArenaComponent implements OnInit {
   withSound = true; // put it to false to disable sound
   wasSplashDisplayed: boolean; // put it to true to disable splash screen
 
-  shouldUserSelectMove: boolean;
+  shouldUserSelectMove = false;
   selectedMoveEvent = new BehaviorSubject<Move>(undefined);
   logObservable = new BehaviorSubject<AttackLog>(undefined);
   logEvent: Observable<AttackLog> = this.logObservable.asObservable();
@@ -26,28 +26,36 @@ export class BattleArenaComponent implements OnInit {
   ngOnInit(): void {
       const randArena = Math.floor(Math.random() * BattleArenaComponent.ArenaNumber) + 1;
       this.chooseArena = `/assets/pictures/arenas/${randArena}.png`;
-      this.selectedMoveEvent.subscribe(userMove => {
-        this.shouldUserSelectMove = false;
-        const computerPokemon = this.battle.SecondPokemon;
-        const computerMoveIndex = Math.floor(Math.random() * computerPokemon.Moves.length);
-        const computerMove = computerPokemon.Moves[computerMoveIndex];
-        const computerMoveName = computerMove ? computerMove.Name : undefined;
-        const userMoveName = userMove ? userMove.Name : undefined;
-        const userAccuracy = Math.floor(Math.random() * 100) + 1;
-        const computerAccuracy = Math.floor(Math.random() * 100) + 1;
-        this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy, this.logObservable);
-        if (!this.battle.isBattleEnded()) {
-          this.turnLoop();
-        }
-      });
-      this.turnLoop();
   }
 
   turnLoop(): void {
     this.shouldUserSelectMove = true;
   }
 
+  startBattle(): void {
+    setTimeout(() => {
+      this.selectedMoveEvent.subscribe(userMove => {
+        if (userMove) {
+          this.shouldUserSelectMove = false;
+          const computerPokemon = this.battle.SecondPokemon;
+          const computerMoveIndex = Math.floor(Math.random() * computerPokemon.Moves.length);
+          const computerMove = computerPokemon.Moves[computerMoveIndex];
+          const computerMoveName = computerMove ? computerMove.Name : undefined;
+          const userMoveName = userMove ? userMove.Name : undefined;
+          const userAccuracy = Math.floor(Math.random() * 100) + 1;
+          const computerAccuracy = Math.floor(Math.random() * 100) + 1;
+          this.battle.launchTurn(userMoveName, computerMoveName, userAccuracy, computerAccuracy, this.logObservable);
+        }
+        if (!this.battle.isBattleEnded()) {
+          this.turnLoop();
+        }
+      });
+      this.turnLoop();
+    }, 1500);
+  }
+
   onSplashEnded() {
     this.wasSplashDisplayed = true;
+    this.startBattle();
   }
 }

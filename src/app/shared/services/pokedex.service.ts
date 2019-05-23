@@ -77,7 +77,9 @@ export class PokedexService {
         if (!pokemon) {
             return null;
         }
-        return new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, givenLevel, pokemon.Types);
+        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, givenLevel, pokemon.Types);
+        newPokemon.Moves = [...pokemon.Moves];
+        return newPokemon;
     }
 
 

@@ -30,7 +30,9 @@ export class UserIOComponent implements OnInit {
 
   ngOnInit(): void {
     this.logEvent.subscribe(logCombat => {
-      this.logs.push(logCombat);
+      if (logCombat) {
+        this.logs.push(logCombat);
+      }
     });
   }
 
