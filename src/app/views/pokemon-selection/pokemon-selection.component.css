@@ -22,9 +22,13 @@
 }
 
 .btn {
-    background-color: #ff1c1c;
+    background-color: #e11c1c;
     border-color: black;
 }
+.btn:hover{
+    background-color: #ff1c1c;
+}
+
 
 h1 {
     font-family: pokemon-title;
