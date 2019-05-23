@@ -27,7 +27,7 @@ app-root {
 
 body {
     background-size: cover;
-    background: #464646 url("assets/pictures/background.png") no-repeat fixed center center;
+    background: #464646 url("assets/pictures/background.png") repeat-x fixed center center;
 }
 
 /*Disable image select*/
