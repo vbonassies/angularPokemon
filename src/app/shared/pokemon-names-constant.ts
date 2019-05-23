@@ -22,7 +22,6 @@ export const availablePokemons = [
   'Wingull',
   'Mantine',
   'Beautifly',
-  'Charizard',
   'Skiploom',
   'Mewtwo',
   'Mew',
