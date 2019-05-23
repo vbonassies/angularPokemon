@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Pokemon } from '../../shared/models/pokemon/pokemon';
 import {Move} from '../../shared/models/move/move';
 import {Router} from '@angular/router';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-move-selector',

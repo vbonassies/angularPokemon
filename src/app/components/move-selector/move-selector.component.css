@@ -29,3 +29,8 @@ span:hover {
   bottom: 3px;
   padding-left: 5px;
 }
+
+.moveSelect > span {
+  font-size: 14px !important;
+  display: block;
+}

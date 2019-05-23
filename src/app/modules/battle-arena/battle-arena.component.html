@@ -1,4 +1,5 @@
 <div class="gameboy">
+    <img src="assets/pictures/red-led.png" class="powerLed" />
     <div class="gameboy-sceen">
         <video *ngIf="!wasSplashDisplayed" class="startVideo" autoplay [autoplay]="'true'" (ended)="onSplashEnded()" >
             <source src="/assets/videos/gameboy-start.mp4" type="video/mp4">

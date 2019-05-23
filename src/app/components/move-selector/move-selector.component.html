@@ -12,13 +12,10 @@
             <br/>
             <span (click)="onNotRun()" (mouseleave)="cursor=''" (mouseenter)="cursor='no'"><span *ngIf="cursor=='no'">&gt;</span>NO</span>
         </div>
-        <div *ngIf="selectType=='fight'">
+        <div *ngIf="selectType=='fight'" class="moveSelect" >
             <span *ngIf="pokemon.Moves[0]" (click)="onMoveSelected(pokemon.Moves[0])" (mouseleave)="cursor=''" (mouseenter)="cursor='move1'"><span *ngIf="cursor=='move1'">&gt;</span>{{pokemon.Moves[0].Name}}</span>
-            <br/>
             <span *ngIf="pokemon.Moves[1]" (click)="onMoveSelected(pokemon.Moves[1])" (mouseleave)="cursor=''" (mouseenter)="cursor='move2'"><span *ngIf="cursor=='move2'">&gt;</span>{{pokemon.Moves[1].Name}}</span>
-            <br/>
             <span *ngIf="pokemon.Moves[2]" (click)="onMoveSelected(pokemon.Moves[2])" (mouseleave)="cursor=''" (mouseenter)="cursor='move3'"><span *ngIf="cursor=='move3'">&gt;</span>{{pokemon.Moves[2].Name}}</span>
-            <br/>
             <span *ngIf="pokemon.Moves[3]" (click)="onMoveSelected(pokemon.Moves[3])" (mouseleave)="cursor=''" (mouseenter)="cursor='move4'"><span *ngIf="cursor=='move4'">&gt;</span>{{pokemon.Moves[3].Name}}</span>
         </div>
     </div>
