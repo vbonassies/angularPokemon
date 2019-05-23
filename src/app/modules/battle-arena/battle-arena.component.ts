@@ -4,6 +4,8 @@ import {Move} from '../../shared/models/move/move';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AttackLog} from '../../shared/models/battle/attack-log';
 import {Router} from '@angular/router';
+import {StorageService} from '../../shared/services/storage.service';
+import {PokedexService} from '../../shared/services/pokedex.service';
 
 @Component({
   selector: 'app-battle-arena',
@@ -24,7 +26,7 @@ export class BattleArenaComponent implements OnInit {
   logObservable = new BehaviorSubject<AttackLog>(undefined);
   logEvent: Observable<AttackLog> = this.logObservable.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storage: StorageService, private pokedex: PokedexService) {}
 
   ngOnInit(): void {
       const randArena = Math.floor(Math.random() * BattleArenaComponent.ArenaNumber) + 1;
@@ -51,6 +53,9 @@ export class BattleArenaComponent implements OnInit {
         }
         if (!this.battle.isBattleEnded()) {
           this.turnLoop();
+        } else {
+          this.storage.saveUserPokemon(this.battle.FirstPokemon);
+          this.pokedex.applyPokemonModifications(this.battle.FirstPokemon);
         }
       });
       this.turnLoop();

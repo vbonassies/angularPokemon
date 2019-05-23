@@ -27,6 +27,8 @@ export class Pokemon {
     this.refHp = referenceHp;
     this.setLevel(level);
     this.Types = types;
+    this.Xp = 0;
+    this.XpBeforeNextLevel = 100;
     this.Moves = [];
   }
 

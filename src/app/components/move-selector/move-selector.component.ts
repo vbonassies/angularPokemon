@@ -3,6 +3,8 @@ import { Pokemon } from '../../shared/models/pokemon/pokemon';
 import {Move} from '../../shared/models/move/move';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
+import {PokedexService} from '../../shared/services/pokedex.service';
+import {StorageService} from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-move-selector',
@@ -25,7 +27,7 @@ export class MoveSelectorComponent implements OnInit {
   @Output()
   log = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private pokedex: PokedexService, private storage: StorageService) {}
 
   ngOnInit(): void {
   }
@@ -48,6 +50,8 @@ export class MoveSelectorComponent implements OnInit {
   }
 
   onRun() {
+    this.pokedex.applyPokemonModifications(this.pokemon);
+    this.storage.saveUserPokemon(this.pokemon);
     this.router.navigate(['']);
   }
 

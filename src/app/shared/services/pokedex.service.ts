@@ -8,6 +8,7 @@ import {Move} from '../models/move/move';
 import {PokeapiPokemon} from '../models/pokeapi-dto/pokeapi-pokemon';
 import {flatMap, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {StorageService} from './storage.service';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class PokedexService {
     private isInitialized = new BehaviorSubject<boolean>(false);
     private allowedPokemons: string[];
 
-    constructor(private pokeapi: PokeApiService) {
+    constructor(private pokeapi: PokeApiService, private storage: StorageService) {
         this.allowedPokemons = environment.availablePokemons;
         this.initializePokedex();
     }
@@ -36,6 +37,15 @@ export class PokedexService {
             pokemonTasks.push(this.pokeapi.getPokemon(pokemonName).pipe(flatMap(poke => this.loadDetails(poke))));
         }
         forkJoin(pokemonTasks).subscribe(() => {
+            this.getPokedex().sort((pokea, pokeb) => {
+                if (pokea.Name < pokeb.Name) {
+                    return -1;
+                }
+                if (pokea.Name > pokeb.Name) {
+                    return 1;
+                }
+                return 0;
+            })
             this.isInitialized.next(true);
         });
     }
@@ -57,6 +67,16 @@ export class PokedexService {
             moveDetailsObservables.push(this.pokeapi.getMoveDetail(pokemon.moves[i]));
         }
 
+        pokemonItem.setLevel(this.storage.getUserPokemonLevel(pokemon.name));
+        const gettedHp = this.storage.getUserPokemonHp(pokemon.name);
+        if (gettedHp >= 0 && gettedHp <= pokemonItem.MaxHp) {
+            pokemonItem.Hp = gettedHp;
+        }
+        const gettedXp = this.storage.getUserPokemonXp(pokemon.name);
+        if (gettedXp >= 0 && gettedXp <= pokemonItem.XpBeforeNextLevel) {
+            pokemonItem.Xp = gettedXp;
+        }
+
         return forkJoin(moveDetailsObservables).pipe(map(details => {
             for (const detail of details) {
                 const move = new Move(detail.name, detail.accuracy, detail.power);
@@ -67,10 +87,19 @@ export class PokedexService {
     }
 
     getPokemon(pokemonName: string): Pokemon {
-        return this.getPokedex().find(pokemon => pokemon.Name === pokemonName);
+        const pokedex = this.getPokedex();
+        const pokemon = pokedex.find(pok => pok.Name === pokemonName);
+        if (!pokemon) {
+            return null;
+        }
+        const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, pokemon.Level, pokemon.Types);
+        newPokemon.Hp = pokemon.Hp;
+        newPokemon.Xp = pokemon.Xp;
+        newPokemon.Moves = [...pokemon.Moves];
+        return newPokemon;
     }
 
-    getRandomPokemon(givenLevel: number): Pokemon {
+    getNewRandomPokemon(givenLevel: number): Pokemon {
         const pokedex = this.getPokedex();
         const randomIndex = Math.floor(Math.random() * pokedex.length);
         const pokemon = pokedex[randomIndex];
@@ -82,5 +111,15 @@ export class PokedexService {
         return newPokemon;
     }
 
-
+    applyPokemonModifications(pokemon: Pokemon): void {
+        if (!pokemon) {
+            return;
+        }
+        const pokedex = this.getPokedex();
+        const pokemonIndex = pokedex.findIndex(pok => pok.Name === pokemon.Name);
+        if (pokemonIndex === -1) {
+            return;
+        }
+        pokedex.splice(pokemonIndex, 1, pokemon);
+    }
 }

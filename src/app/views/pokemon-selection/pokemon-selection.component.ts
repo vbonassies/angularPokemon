@@ -4,6 +4,7 @@ import {Pokemon} from '../../shared/models/pokemon/pokemon';
 import {SpriteService} from '../../shared/services/sprite.service';
 import {DateService} from '../../shared/services/date.service';
 import {Subscription} from 'rxjs';
+import {StorageService} from '../../shared/services/storage.service';
 
 @Component({
     templateUrl: './pokemon-selection.component.html',
@@ -15,7 +16,8 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private pokeDexSubscription: Subscription;
 
-    constructor(private pokedex: PokedexService, private sprite: SpriteService, private dateService: DateService) {
+    constructor(private pokedex: PokedexService, private sprite: SpriteService, private dateService: DateService,
+                private storage: StorageService) {
     }
 
     ngOnInit(): void {
@@ -46,5 +48,11 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
             stringValues.push(type.toString());
         }
         return stringValues.join(', ');
+    }
+
+    regeneratePokemon(pokemon: Pokemon): void {
+        pokemon.regenerate();
+        this.pokedex.applyPokemonModifications(pokemon);
+        this.storage.saveUserPokemon(pokemon);
     }
 }

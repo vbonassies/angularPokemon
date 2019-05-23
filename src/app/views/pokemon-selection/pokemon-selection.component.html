@@ -18,7 +18,7 @@
                         <div class="progress-bar bg-info" role="progressbar" [style.width]="poke.getXpPercents() + '%'" ></div>
                     </div>
                     <hr/>
-                    <div class="potionDiv" *ngIf="poke.getHpPercents() < 100" (click)="poke.regenerate()"  >
+                    <div class="potionDiv" *ngIf="poke.getHpPercents() < 100" (click)="regeneratePokemon(poke)"  >
                         <span>Use a {{ poke.getHpPercents() == 0 ? 'hyper' : 'maxi' }} potion</span>
                         <img *ngIf="poke.getHpPercents() < 100 && poke.getHpPercents() > 0" src="assets/pictures/hyper-potion.png" />
                         <img *ngIf="poke.getHpPercents() == 0" src="assets/pictures/max-potion.png" />
