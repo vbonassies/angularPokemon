@@ -17,6 +17,7 @@ export class Pokemon {
 
   public isAttacked = false;
   public isAttacking = false;
+  public isCritic = false;
 
 
   constructor(pokemonName: string, speed: number, referenceHp: number, level: number, types: PokemonType[]) {
@@ -46,20 +47,27 @@ export class Pokemon {
     for (const typeFirstPokemon of this.Types) {
       for (const typeSecondPokemon of secondPokemonType) {
         if (typeFirstPokemon === PokemonType.fire && typeSecondPokemon === PokemonType.water) {
+          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.grass && typeSecondPokemon === PokemonType.water) {
+          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.water && typeSecondPokemon === PokemonType.fire) {
+          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.flying && typeSecondPokemon === PokemonType.grass) {
+          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.ground && typeSecondPokemon === PokemonType.poison) {
+          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.bug && typeSecondPokemon === PokemonType.grass) {
+          this.isCritic = true;
           return true;
-        } else {
-          return typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water;
+        } else if (typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water) {
+          return this.isCritic = true;
         }
+        return false;
       }
     }
   }
@@ -84,7 +92,7 @@ export class Pokemon {
       enemy.Hp = finalPv;
       this.isAttacking = false;
       enemy.isAttacked = false;
-      logger(AttackLog.attack(this, enemy, moveToExecute, damageDealt));
+      logger(AttackLog.attack(this, enemy, moveToExecute, damageDealt, this.isCritic));
       return MoveResult.MoveSuccess;
     }
     logger(AttackLog.failAttack(this, moveToExecute));
