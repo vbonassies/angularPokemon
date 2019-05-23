@@ -12,6 +12,7 @@ import {DummyComponent} from '../../../test-helpers/dummy.component';
 import {PokeApiService} from '../../shared/services/pokeapi.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {MockHelper} from '../../../test-helpers/mock-helper';
+import {StorageService} from '../../shared/services/storage.service';
 
 const testRoutes: Routes = [
     {
@@ -42,6 +43,7 @@ describe('PokemonSelectionComponent', () => {
                 {provide: PokedexService, useClass: PokedexService},
                 SpriteService,
                 DateService,
+                StorageService,
                 AppBaseHrefProvider,
             ]
         }).compileComponents();
@@ -73,8 +75,8 @@ describe('PokemonSelectionComponent', () => {
     it('Should render time correctly', fakeAsync(() => {
         component.today = new Date('Thu May 23 2019 11:19:28');
         fixture.detectChanges();
-        const h1 = fixture.debugElement.nativeElement.querySelector('h1');
-        expect(h1.textContent).toBe('Time is 11:19:28');
+        const h1 = fixture.debugElement.nativeElement.querySelectorAll('h1');
+        expect(h1[1].textContent).toBe('Time is 11:19:28');
     }));
 
     it('Should redirect on pokemon choosen', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {

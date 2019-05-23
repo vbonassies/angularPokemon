@@ -7,7 +7,7 @@ module.exports = {
         "/src/environments/"
     ],
     "moduleNameMapper": {
-        'environments/(.*)$': '<rootDir>/environments/environment.test.ts',
+        'environments/(.*)$': '<rootDir>/src/environments/environment.test.ts',
     },
     "coverageReporters": ['html'],
     "coverageDirectory": "./jest-coverage",

@@ -7,8 +7,8 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {AppRoutingModule} from '../../app-routing.module';
 import {AppBaseHrefProvider} from '../../../test-helpers/app-base-href.provider';
 import {PokedexService} from '../../shared/services/pokedex.service';
-import {PokeApiService} from "../../shared/services/pokeapi.service";
-import {StorageService} from "../../shared/services/storage.service";
+import {PokeApiService} from '../../shared/services/pokeapi.service';
+import {StorageService} from '../../shared/services/storage.service';
 
 
 describe('BattleComponent', () => {

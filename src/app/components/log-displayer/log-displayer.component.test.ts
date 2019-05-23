@@ -5,6 +5,7 @@ import {PokemonType} from '../../shared/models/pokemon/pokemon-types';
 import {LogDisplayerComponent} from './log-displayer.component';
 import {AttackLog} from '../../shared/models/battle/attack-log';
 import {Move} from '../../shared/models/move/move';
+import {PokemonTypePipe} from '../../pipes/pokemon-type.pipe';
 
 
 describe('LogDisplayerComponent', () => {
@@ -19,7 +20,8 @@ describe('LogDisplayerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                LogDisplayerComponent
+                LogDisplayerComponent,
+                PokemonTypePipe
             ],
         }).compileComponents();
 

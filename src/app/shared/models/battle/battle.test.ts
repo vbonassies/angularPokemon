@@ -2,15 +2,15 @@ import {Pokemon} from '../pokemon/pokemon';
 import {PokemonType} from '../pokemon/pokemon-types';
 import {Battle} from './battle';
 import {Move} from '../move/move';
-import {BehaviorSubject} from "rxjs";
-import {AttackLog} from "./attack-log";
-import {log} from "util";
+import {BehaviorSubject} from 'rxjs';
+import {AttackLog} from './attack-log';
+import {fakeAsync, tick} from '@angular/core/testing';
 
 const megaPuchMove = new Move('Mega Punch', 85, 20);
 const rollingStonesMove = new Move('Rolling Stones', 80, 10);
 const canonAOMove = new Move('Canon O', 10, 2);
 
-const pikachu = new Pokemon('Pikachu', 90, 50, 1, [PokemonType.electric]);
+const pikachu = new Pokemon('Pikachu', 90, 50, 10, [PokemonType.electric]);
 pikachu.Moves = [megaPuchMove];
 const carapuce = new Pokemon('Carapuce', 43, 50, 1, [PokemonType.water]);
 carapuce.Moves = [rollingStonesMove, canonAOMove];
@@ -49,31 +49,33 @@ test('getMove should return the move regarding attackers order (firstPokemon as 
     expect(battle.getMove(carapuce, pikachuMove.Name, carapuceMove.Name)).toBe(carapuceMove);
 });
 
-test('Test if first pokemon win during launchTurn', () => {
+test('Test if first pokemon win during launchTurn', fakeAsync(() => {
     const logObservable = new BehaviorSubject<AttackLog>(undefined);
 
     const pikaUlti = pikachu;
-    const pikachuUltiMove = new Move('UltiMove', 100, 100);
+    const pikachuUltiMove = new Move('UltiMove', 100, 500);
     pikaUlti.Moves.push(pikachuUltiMove);
     const battle = new Battle(pikaUlti, carapuce);
     const carapuceMove = carapuce.Moves[0];
-    expect(battle.launchTurn(pikachuUltiMove.Name, carapuceMove.Name, 10, 10, logObservable)).toBe(pikaUlti);
+    expect(battle.launchTurn(pikachuUltiMove.Name, carapuceMove.Name, 10, 10, logObservable));
+    tick(1000);
     expect(battle.Round).toBe(1);
     expect(battle.Winner).toBe(pikaUlti);
-});
+}));
 
-test('Test if second pokemon win during launchTurn', () => {
+test('Test if second pokemon win during launchTurn', fakeAsync(() => {
     const logObservable = new BehaviorSubject<AttackLog>(undefined);
 
     const pikaUlti = pikachu;
-    const pikachuUltiMove = new Move('UltiMove', 100, 100);
+    const pikachuUltiMove = new Move('UltiMove', 100, 500);
     pikaUlti.Moves.push(pikachuUltiMove);
     const battle = new Battle(carapuce, pikaUlti);
     const carapuceMove = carapuce.Moves[0];
-    expect(battle.launchTurn(carapuceMove.Name, pikachuUltiMove.Name, 10, 10, logObservable)).toBe(pikaUlti);
+    expect(battle.launchTurn(carapuceMove.Name, pikachuUltiMove.Name, 10, 10, logObservable));
+    tick(1000);
     expect(battle.Round).toBe(1);
     expect(battle.Winner).toBe(pikaUlti);
-});
+}));
 
 test('Test that launchTurn on ended battle-arena throws', () => {
     const logObservable = new BehaviorSubject<AttackLog>(undefined);
@@ -93,7 +95,7 @@ test('Test is battle-arena ended if winner is set', () => {
     expect(battle.isBattleEnded()).toBe(true);
 });
 
-test('Test that regular fight end correctly', () => {
+test('Test that regular fight end correctly', fakeAsync(() => {
     const logObservable = new BehaviorSubject<AttackLog>(undefined);
 
     const battle = new Battle(carapuce, pikachu);
@@ -104,7 +106,8 @@ test('Test that regular fight end correctly', () => {
         const secondRandomAccuracy = Math.floor(Math.random() * 101);
         battle.launchTurn(carapuce.Moves[carapuceMove].Name, pikachu.Moves[pikachuMove].Name, firstRandomAccuracy,
             secondRandomAccuracy, logObservable);
+        tick(1000);
     }
 
     expect(battle.isBattleEnded()).toBe(true);
-});
+}));
