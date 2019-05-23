@@ -1,7 +1,7 @@
 export enum PokemonType {
-    Electric = 'Eletric',
-    Fire = 'Fire',
-    Water = 'Water',
-    Grass = 'Grass',
-    Flying = 'Flying'
+    electric = 'Eletric',
+    fire = 'Fire',
+    water = 'Water',
+    grass = 'Grass',
+    flying = 'Flying'
 }

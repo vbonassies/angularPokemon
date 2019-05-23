@@ -6,7 +6,7 @@
     <div *ngIf="isFirst" class="progress progressRenderer xpProgress">
         <div class="progress-bar bg-info" role="progressbar" [style.width]="getXpPercents() + '%'" ></div>
     </div>
-    <span class="labelRenderer" [ngClass]="isFirst ? 'levelFirst' : 'levelSecond'">Lv{{12//pokemon.Level}}</span>
+    <span class="labelRenderer" [ngClass]="isFirst ? 'levelFirst' : 'levelSecond'">Lv{{pokemon.Level}}</span>
     <span class="labelRenderer" [ngClass]="isFirst ? 'nameFirst' : 'nameSecond'">{{pokemon.Name}}</span>
     <span *ngIf="isFirst" class="labelRenderer pvLabel">{{pokemon.Hp}}/{{pokemon.MaxHp}}</span>
 </div>

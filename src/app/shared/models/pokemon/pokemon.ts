@@ -10,22 +10,22 @@ export class Pokemon {
   public MaxHp: number;
   public XpBeforeNextLevel: number;
   public Xp: number;
+  public Level: number;
   public Moves: Move[];
-  public Type: PokemonType[];
+  public Types: PokemonType[];
 
   public isAttacked = false;
   public isAttacking = false;
 
 
-  constructor(pokemonName: string, speed: number, moves: Move[], type: PokemonType[]) {
+  constructor(pokemonName: string, speed: number, maxHp: number, level: number, types: PokemonType[]) {
     this.Name = pokemonName;
     this.Speed = speed;
-    this.Moves = moves;
-    this.Hp = 100;
-    this.MaxHp = 100;
-    this.XpBeforeNextLevel = 100;
-    this.Xp = 100;
-    this.Type = type;
+    this.MaxHp = maxHp;
+    this.Hp = maxHp;
+    this.Level = level;
+    this.Types = types;
+    this.Moves = [];
   }
 
   public isDie(): boolean {
@@ -37,18 +37,18 @@ export class Pokemon {
   }
 
   public isStrongAgainstEnemy(secondPokemonType: PokemonType[]) {
-    for (const typeFirstPokemon of this.Type) {
+    for (const typeFirstPokemon of this.Types) {
       for (const typeSecondPokemon of secondPokemonType) {
-        if (typeFirstPokemon === PokemonType.Fire && typeSecondPokemon === PokemonType.Water) {
+        if (typeFirstPokemon === PokemonType.fire && typeSecondPokemon === PokemonType.water) {
           return true;
-        } else if (typeFirstPokemon === PokemonType.Grass && typeSecondPokemon === PokemonType.Water) {
+        } else if (typeFirstPokemon === PokemonType.grass && typeSecondPokemon === PokemonType.water) {
           return true;
-        } else if (typeFirstPokemon === PokemonType.Water && typeSecondPokemon === PokemonType.Fire) {
+        } else if (typeFirstPokemon === PokemonType.water && typeSecondPokemon === PokemonType.fire) {
           return true;
-        } else if (typeFirstPokemon === PokemonType.Flying && typeSecondPokemon === PokemonType.Grass) {
+        } else if (typeFirstPokemon === PokemonType.flying && typeSecondPokemon === PokemonType.grass) {
           return true;
         } else {
-          return typeFirstPokemon === PokemonType.Electric && typeSecondPokemon === PokemonType.Water;
+          return typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water;
         }
       }
     }
@@ -63,10 +63,10 @@ export class Pokemon {
     if (generatedAccuracy <= moveToExecute.Accuracy) {
       this.isAttacking = true;
       enemy.isAttacked = true;
-      if (this.isStrongAgainstEnemy(enemy.Type)) {
-        finalPv = enemy.Hp - moveToExecute.Damage * 2;
+      if (this.isStrongAgainstEnemy(enemy.Types)) {
+        finalPv = enemy.Hp - moveToExecute.Power * 2;
       } else {
-        finalPv = enemy.Hp - moveToExecute.Damage;
+        finalPv = enemy.Hp - moveToExecute.Power;
       }
       if (finalPv <= 0) {
         finalPv = 0;

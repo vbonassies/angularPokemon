@@ -11,10 +11,7 @@ export const availablePokemons = [
   'Sandshrew',
   'Vulpix',
   'Oddish',
-  'Diglett'
-];
-
-export const availableFlyingPokemons = [
+  'Diglett',
   'Zubat',
   'Pidgeot',
   'Ledyba',

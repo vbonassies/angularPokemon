@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {backgroundAvailableFlyingPokemons} from '../models/pokedex/pokemon-names-constant';
+import {backgroundAvailableFlyingPokemons} from '../pokemon-names-constant';
 
 
 @Injectable()

@@ -49,3 +49,10 @@ img {
     -o-user-drag: none;
     user-drag: none;
 }
+
+.preloader > img {
+    height: 200px;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+}

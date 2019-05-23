@@ -11,6 +11,7 @@ import {SpriteService} from '../shared/services/sprite.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DateService} from '../shared/services/date.service';
 import {BackgroundPokemonModule} from '../modules/background-pokemon/background-pokemon.module';
+import {PokeApiService} from '../shared/services/pokeapi.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {BackgroundPokemonModule} from '../modules/background-pokemon/background-
   ],
   exports: [
   ],
-  providers: [PokedexService, SpriteService, DateService],
+  providers: [PokedexService, SpriteService, DateService, PokeApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -81,7 +81,7 @@ test('If generated accuracy is less than move accuracy, applyMove must fail, app
   const pokemonMove = new Move('ATestMove', 'Test description', 15, 10);
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
-  const expectedNewPv = newPokemon.Hp - pokemonMove.Damage;
+  const expectedNewPv = newPokemon.Hp - pokemonMove.Power;
   expect(newPokemon.applyMove(newPokemon, pokemonMove, 2, emptyLog)).toBe(MoveResult.MoveSuccess);
   expect(newPokemon.Hp).toBe(expectedNewPv);
 });
@@ -93,7 +93,7 @@ test('If generated accuracy is equals than move accuracy, applyMove must fail, a
   const pokemonMove = new Move('ATestMove', 'Test description', 15, 10);
   const newPokemon = new Pokemon(pokemonName, pokemonSpeed, [pokemonMove], type);
 
-  const expectedNewPv = newPokemon.Hp - pokemonMove.Damage;
+  const expectedNewPv = newPokemon.Hp - pokemonMove.Power;
   expect(newPokemon.applyMove(newPokemon, pokemonMove, 15, emptyLog)).toBe(MoveResult.MoveSuccess);
   expect(newPokemon.Hp).toBe(expectedNewPv);
 });

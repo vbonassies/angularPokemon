@@ -9,5 +9,5 @@ test('Move is correctly constructed', () => {
     expect(move.Name).toBe(moveName);
     expect(move.Description).toBe(moveDescription);
     expect(move.Accuracy).toBe(moveAccuracy);
-    expect(move.Damage).toBe(moveDamage);
+    expect(move.Power).toBe(moveDamage);
 });

@@ -1,4 +1,4 @@
-import {availableFlyingPokemons} from '../models/pokedex/pokemon-names-constant';
+import {availableFlyingPokemons} from '../pokemon-names-constant';
 import {SpriteService} from './sprite.service';
 
 describe('SpriteService', () => {
