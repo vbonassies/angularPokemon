@@ -1,5 +1,5 @@
 export enum PokemonType {
-    Electric = 'Electric',
+    Electric = 'Eletric',
     Fire = 'Fire',
     Water = 'Water',
     Grass = 'Grass',

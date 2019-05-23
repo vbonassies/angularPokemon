@@ -1,7 +1,7 @@
-import { PokemonType } from './pokemon-types';
-import { Move } from '../move/move';
-import { MoveResult } from '../move/move-result';
-import { AttackLog } from '../battle/attack-log';
+import {PokemonType} from './pokemon-types';
+import {Move} from '../move/move';
+import {MoveResult} from '../move/move-result';
+import {AttackLog} from '../battle/attack-log';
 
 export class Pokemon {
   public Name: string;
@@ -11,13 +11,13 @@ export class Pokemon {
   public XpBeforeNextLevel: number;
   public Xp: number;
   public Moves: Move[];
-  public Type: PokemonType;
+  public Type: PokemonType[];
 
   public isAttacked = false;
   public isAttacking = false;
 
 
-  constructor(pokemonName: string, speed: number, moves: Move[], type: PokemonType) {
+  constructor(pokemonName: string, speed: number, moves: Move[], type: PokemonType[]) {
     this.Name = pokemonName;
     this.Speed = speed;
     this.Moves = moves;
@@ -36,15 +36,21 @@ export class Pokemon {
     return this.Moves.indexOf(move) !== -1;
   }
 
-  public isStrongAgainstEnemy(secondPokemonType: PokemonType) {
-    if (this.Type === PokemonType.Fire && secondPokemonType === PokemonType.Water) {
-      return true;
-    } else if (this.Type === PokemonType.Grass && secondPokemonType === PokemonType.Water) {
-      return true;
-    } else if (this.Type === PokemonType.Water && secondPokemonType === PokemonType.Fire) {
-      return true;
-    } else {
-      return this.Type === PokemonType.Electric && secondPokemonType === PokemonType.Water;
+  public isStrongAgainstEnemy(secondPokemonType: PokemonType[]) {
+    for (const typeFirstPokemon of this.Type) {
+      for (const typeSecondPokemon of secondPokemonType) {
+        if (typeFirstPokemon === PokemonType.Fire && typeSecondPokemon === PokemonType.Water) {
+          return true;
+        } else if (typeFirstPokemon === PokemonType.Grass && typeSecondPokemon === PokemonType.Water) {
+          return true;
+        } else if (typeFirstPokemon === PokemonType.Water && typeSecondPokemon === PokemonType.Fire) {
+          return true;
+        } else if (typeFirstPokemon === PokemonType.Flying && typeSecondPokemon === PokemonType.Grass) {
+          return true;
+        } else {
+          return typeFirstPokemon === PokemonType.Electric && typeSecondPokemon === PokemonType.Water;
+        }
+      }
     }
   }
 

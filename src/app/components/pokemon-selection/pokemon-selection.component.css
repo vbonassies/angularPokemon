@@ -18,3 +18,7 @@
 .card-title{
     margin-bottom: 0;
 }
+
+h1 {
+    font-family: pokemon-title;
+}

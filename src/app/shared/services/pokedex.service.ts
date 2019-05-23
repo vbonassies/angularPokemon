@@ -21,7 +21,7 @@ export class PokedexService {
     getRandomPokemon(givenLevel: number): Pokemon {
         const pokedex = this.getPokedex();
         const randomIndex = Math.floor(Math.random() * pokedex.pokemons.length);
-        return new Pokemon(pokedex.pokemons[randomIndex].Name, givenLevel, [], PokemonType.Fire);
+        return new Pokemon(pokedex.pokemons[randomIndex].Name, givenLevel, [], [PokemonType.Fire]);
     }
 
 

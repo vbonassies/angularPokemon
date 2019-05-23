@@ -8,10 +8,10 @@ export class Pokedex {
 
     constructor() {
         for (const pokemonName of availablePokemons) {
-            this.pokemons.push(new Pokemon(pokemonName, 10, [], PokemonType.Electric));
+            this.pokemons.push(new Pokemon(pokemonName, 10, [], [PokemonType.Electric]));
         }
         for (const pokemonName of availableFlyingPokemons) {
-            this.pokemons.push(new Pokemon(pokemonName, 10, [], PokemonType.Flying));
+            this.pokemons.push(new Pokemon(pokemonName, 10, [], [PokemonType.Flying]));
         }
     }
 }

@@ -5,7 +5,7 @@ import {SelectedMove} from '../move-selector/selected-move';
 @Component({
   selector: 'app-battle-arena',
   templateUrl: './battle-arena.component.html',
-  styleUrls: ['./battle-arena.component.css']
+  styleUrls: ['./battle-arena.component.css'],
 })
 export class BattleArenaComponent implements OnInit {
   public static ArenaNumber = 2;
