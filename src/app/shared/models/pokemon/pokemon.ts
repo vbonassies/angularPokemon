@@ -20,7 +20,6 @@ export class Pokemon {
 
   public isAttacked = false;
   public isAttacking = false;
-  public isCritic = false;
 
 
   constructor(pokemonName: string, speed: number, referenceHp: number, level: number, types: PokemonType[]) {
@@ -29,14 +28,14 @@ export class Pokemon {
     this.ReferenceHp = referenceHp;
     this.setLevel(level);
     this.Types = types;
-    this.Xp = 0;
-    this.XpBeforeNextLevel = 100;
     this.Moves = [];
   }
 
   setLevel(newLevel: number) {
     this.MaxHp = Math.ceil(this.ReferenceHp * (newLevel / 20)) + this.ReferenceHp;
     this.Hp = this.MaxHp;
+    this.Xp = 0;
+    this.XpBeforeNextLevel = this.MaxHp;
     this.Level = newLevel;
   }
 
@@ -52,25 +51,19 @@ export class Pokemon {
     for (const typeFirstPokemon of this.Types) {
       for (const typeSecondPokemon of secondPokemonType) {
         if (typeFirstPokemon === PokemonType.fire && typeSecondPokemon === PokemonType.water) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.grass && typeSecondPokemon === PokemonType.water) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.water && typeSecondPokemon === PokemonType.fire) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.flying && typeSecondPokemon === PokemonType.grass) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.ground && typeSecondPokemon === PokemonType.poison) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.bug && typeSecondPokemon === PokemonType.grass) {
-          this.isCritic = true;
           return true;
         } else if (typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water) {
-          return this.isCritic = true;
+          return true;
         }
         return false;
       }
@@ -91,14 +84,15 @@ export class Pokemon {
       enemy.isAttacked = true;
       const damage = Math.ceil(moveToExecute.Power * (this.Level / 100)) + Pokemon.DamageSensivity;
       finalPv = enemy.Hp - damage;
-      if (this.isStrongAgainstEnemy(enemy.Types)) {
+      const isCritic = this.isStrongAgainstEnemy(enemy.Types);
+      if (isCritic) {
         finalPv -= damage;
       }
       if (finalPv <= 0) {
         finalPv = 0;
       }
       enemy.Hp = finalPv;
-      logger(AttackLog.attack(this, enemy, moveToExecute, damage, this.isCritic));
+      logger(AttackLog.attack(this, enemy, moveToExecute, damage, isCritic));
       setTimeout(() => {
         this.isAttacking = false;
         enemy.isAttacked = false;
@@ -109,6 +103,21 @@ export class Pokemon {
     logger(AttackLog.failAttack(this, moveToExecute));
     result.next(MoveResult.MoveFails);
     return result;
+  }
+
+  tryLevelUp(ennemy: Pokemon, logger: BehaviorSubject<AttackLog>) {
+    let wonXp = Math.ceil(ennemy.Level * 2);
+    logger.next(AttackLog.wonXp(this, wonXp));
+    if (wonXp >= (this.XpBeforeNextLevel - this.Xp)) {
+      wonXp -= (this.XpBeforeNextLevel - this.Xp);
+      if (this.Level < 99) {
+        logger.next(AttackLog.levelUp(this));
+        this.setLevel(this.Level + 1);
+      } else {
+        wonXp = (this.XpBeforeNextLevel - this.Xp);
+      }
+    }
+    return;
   }
 
   getXpPercents() {

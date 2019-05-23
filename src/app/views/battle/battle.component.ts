@@ -30,7 +30,7 @@ export class BattleComponent implements OnInit {
                     const userPokemon = this.pokedex.getPokemon(params.pokemonName);
                     const opponentLevel = BattleComponent.getEnemyLevel(userPokemon, Math.random);
                     const computerPokemon = this.pokedex.getNewRandomPokemon(opponentLevel);
-                    if (!userPokemon || !computerPokemon) {
+                    if (!userPokemon || !computerPokemon || userPokemon.Hp === 0) {
                         this.router.navigate(['']);
                         return;
                     }

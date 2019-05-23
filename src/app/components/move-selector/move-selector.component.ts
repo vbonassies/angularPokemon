@@ -88,9 +88,6 @@ export class MoveSelectorComponent implements OnInit {
 
   selectMoves() {
     switch (this.cursor) {
-      case 'move1':
-        this.onMoveSelected(this.pokemon.Moves[0]);
-        break;
       case 'move2':
         this.onMoveSelected(this.pokemon.Moves[1]);
         break;
@@ -103,6 +100,9 @@ export class MoveSelectorComponent implements OnInit {
       case 'back':
         this.onBackSelected();
         this.cursor = 'fight';
+        break;
+      default:
+        this.onMoveSelected(this.pokemon.Moves[0]);
         break;
     }
   }
@@ -152,6 +152,9 @@ export class MoveSelectorComponent implements OnInit {
         break;
       case 'back':
         finalCursor = up ? 'move' + this.pokemon.Moves.length : 'move1';
+        break;
+      default:
+        finalCursor = 'move1';
         break;
     }
     this.cursor = finalCursor;

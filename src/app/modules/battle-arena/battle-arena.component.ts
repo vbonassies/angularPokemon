@@ -56,6 +56,9 @@ export class BattleArenaComponent implements OnInit {
                   if (!this.battle.isBattleEnded()) {
                     this.turnLoop();
                   } else {
+                    if (this.battle.Winner === this.battle.FirstPokemon) {
+                      this.battle.FirstPokemon.tryLevelUp(this.battle.SecondPokemon, this.logObservable);
+                    }
                     this.storage.saveUserPokemon(this.battle.FirstPokemon);
                     this.pokedex.applyPokemonModifications(this.battle.FirstPokemon);
                     this.shouldUserSelectForExit = true;
