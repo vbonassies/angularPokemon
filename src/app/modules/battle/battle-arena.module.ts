@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { BattleArenaComponent } from './battle-arena.component';
 import {PokemonModule} from '../pokemon/pokemon.module';
-import {MoveSelectorModule} from '../move-selector/move-selector.module';
 import {UserIOModule} from '../userio/user-i-o.module';
 
 @NgModule({

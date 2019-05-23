@@ -9,10 +9,9 @@ import { AttackLog } from '../../shared/models/battle/attack-log';
 })
 export class LogDisplayerComponent implements OnInit {
 
-  @Input()
-  pokemon: Pokemon;
+  @Input() pokemon: Pokemon;
 
-  attackLogs: Array<AttackLog> = [];
+  @Input() attackLogs: AttackLog[];
 
   ngOnInit(): void {
   }

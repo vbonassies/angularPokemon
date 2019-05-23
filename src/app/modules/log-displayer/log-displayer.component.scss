@@ -1,10 +1,15 @@
-.logDisplayerBackgound {
+:host {
+  display: block;
+  float: left;
+  height: 100%;
   position: relative;
-  background-color: #263137;
+}
+
+.logDisplayerBackgound {
+  height: 100%;
   z-index: 1000;
+  background-color: #263137;
   padding: 2px 3px 0px 3px;
-  width: 600px;
-  height: 100px;
 }
 
 $darkBlueBackground: #263137;

@@ -70,7 +70,6 @@ export class PokedexService {
 
     getRandomPokemon(givenLevel: number): Pokemon {
         const pokedex = this.getPokedex();
-        console.log(pokedex)
         const randomIndex = Math.floor(Math.random() * pokedex.length);
         const pokemon = pokedex[randomIndex];
         if (!pokemon) {

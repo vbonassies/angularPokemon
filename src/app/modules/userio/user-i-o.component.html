@@ -1,2 +1,3 @@
-<app-log-displayer [pokemon]="pokemon" ></app-log-displayer>
-<app-move-selector (selectedMoveEvent)="selectedMoveEvent.emit($event)" [pokemon]="pokemon" [moveSelectRequire]="moveSelectRequire"></app-move-selector>
+<app-log-displayer [attackLogs]="logs"  [pokemon]="pokemon" [style.width]="moveSelectRequire ? '400px' : '600px'" ></app-log-displayer>
+<app-move-selector (log)="onLogged($event)" [selectedMoveEvent]="selectedMoveEvent" [pokemon]="pokemon"
+                   [moveSelectRequire]="moveSelectRequire"></app-move-selector>

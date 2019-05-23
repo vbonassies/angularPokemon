@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Pokemon } from '../../shared/models/pokemon/pokemon';
-import {SelectedMove} from './selected-move';
 import {Move} from '../../shared/models/move/move';
-import {SelectedMoveType} from './selected-move-type';
+import {Router} from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-move-selector',
@@ -10,6 +10,8 @@ import {SelectedMoveType} from './selected-move-type';
   styleUrls: ['./move-selector.component.css']
 })
 export class MoveSelectorComponent implements OnInit {
+  cursor: string;
+  selectType = 'mode';
 
   @Input()
   pokemon: Pokemon;
@@ -17,16 +19,35 @@ export class MoveSelectorComponent implements OnInit {
   @Input()
   moveSelectRequire: boolean;
 
+  @Input()
+  selectedMoveEvent: BehaviorSubject<Move>;
+
   @Output()
-  selectedMoveEvent = new EventEmitter<SelectedMove>();
+  log = new EventEmitter<string>();
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
   }
 
-  onMoveSelected(move: Move, moveType: SelectedMoveType): void {
-    const selectedMove = new SelectedMove();
-    selectedMove.Move = move;
-    selectedMove.MoveType = moveType;
-    this.selectedMoveEvent.emit(selectedMove);
+  onMoveSelected(move: Move): void {
+    this.selectedMoveEvent.next(move);
+  }
+
+  onFightSelect() {
+    this.selectType = 'fight';
+  }
+
+  onRunSelect() {
+    this.log.emit('Do you really want to leave ?');
+    this.selectType = 'run';
+  }
+
+  onNotRun() {
+    this.selectType = 'mode';
+  }
+
+  onRun() {
+    this.router.navigate(['']);
   }
 }

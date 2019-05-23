@@ -1,12 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Pokemon } from '../../shared/models/pokemon/pokemon';
-import {SelectedMove} from '../move-selector/selected-move';
+import {AttackLog} from '../../shared/models/battle/attack-log';
+import {LogDisplayerComponent} from '../log-displayer/log-displayer.component';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Move} from '../../shared/models/move/move';
 
 @Component({
   selector: 'app-user-io',
-  templateUrl: './user-i-o.component.html'
+  templateUrl: './user-i-o.component.html',
+  styleUrls: ['./user-i-o.component.css']
 })
 export class UserIOComponent implements OnInit {
+
+  @ViewChild(LogDisplayerComponent) logDisplayer: LogDisplayerComponent;
 
   @Input()
   pokemon: Pokemon;
@@ -14,9 +20,15 @@ export class UserIOComponent implements OnInit {
   @Input()
   moveSelectRequire: boolean;
 
-  @Output()
-  selectedMoveEvent = new EventEmitter<SelectedMove>();
+  @Input()
+  selectedMoveEvent: BehaviorSubject<Move>;
+
+  logs: AttackLog[] = [];
 
   ngOnInit(): void {
+  }
+
+  onLogged(log: string) {
+    this.logs.push(AttackLog.message(log));
   }
 }
