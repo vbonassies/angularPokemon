@@ -4,7 +4,7 @@ import {PokemonSelectionComponent} from './pokemon-selection.component';
 import {PokedexService} from '../../shared/services/pokedex.service';
 import {SpriteService} from '../../shared/services/sprite.service';
 import {DateService} from '../../shared/services/date.service';
-import {AppRoutingModule} from '../app-routing.module';
+import {AppRoutingModule} from '../../app-routing.module';
 import {Router, RouterModule, Routes} from '@angular/router';
 import {Location} from '@angular/common';
 import {AppBaseHrefProvider} from '../../../test-helpers/app-base-href.provider';

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Pokemon } from '../../shared/models/pokemon/pokemon';
 import {AttackLog} from '../../shared/models/battle/attack-log';
-import {LogDisplayerComponent} from '../log-displayer/log-displayer.component';
+import {LogDisplayerComponent} from '../../components/log-displayer/log-displayer.component';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Move} from '../../shared/models/move/move';
 

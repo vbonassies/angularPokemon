@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-life',
