@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {PokemonSelectionComponent} from './pokemon-selection.component';
 import {PokemonSelectionRoutingModule} from './pokemon-selection-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -14,9 +14,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         BrowserAnimationsModule,
         PokemonSelectionRoutingModule
     ],
-    exports: [PokemonSelectionComponent
+    exports: [
+        PokemonSelectionComponent
     ],
-    providers: [],
-    bootstrap: [PokemonSelectionComponent]
 })
-export class PokemonSelectionModule { }
+export class PokemonSelectionModule {
+}

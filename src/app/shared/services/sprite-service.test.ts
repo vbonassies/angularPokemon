@@ -1,4 +1,4 @@
-import {availableFlyingPokemons} from '../pokemon-names-constant';
+import {backgroundAvailableFlyingPokemons} from '../pokemon-names-constant';
 import {SpriteService} from './sprite.service';
 
 describe('SpriteService', () => {
@@ -8,13 +8,13 @@ describe('SpriteService', () => {
     });
 
     it('Should get latest pokemon on random = 1', () => {
-        const lastPokemon = availableFlyingPokemons[availableFlyingPokemons.length];
+        const lastPokemon = backgroundAvailableFlyingPokemons[backgroundAvailableFlyingPokemons.length];
         const randomPokemon = service.getRandomFlyingPokemonName(() => 1);
         expect(randomPokemon).toBe(lastPokemon);
     });
 
     it('Should get latest pokemon on random = 0', () => {
-        const firstPokemon = availableFlyingPokemons[0];
+        const firstPokemon = backgroundAvailableFlyingPokemons[0];
         const randomPokemon = service.getRandomFlyingPokemonName(() => 0);
         expect(randomPokemon).toBe(firstPokemon);
     });

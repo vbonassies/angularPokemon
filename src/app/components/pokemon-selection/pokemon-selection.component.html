@@ -1,7 +1,5 @@
 <div class="container">
-    <h1>
-        Time is {{today | date:'HH:mm:ss'}}
-    </h1>
+<h1 class="text-center">Time is {{today | date:'HH:mm:ss'}}</h1>
     <div *ngIf="pokedexReady" class="row">
         <div class="col-lg-2 col-md-3 col-sm-6" *ngFor="let poke of getAllPokemons()">
             <div class="card">

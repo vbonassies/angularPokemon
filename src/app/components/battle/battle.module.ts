@@ -17,7 +17,5 @@ import {BattleArenaModule} from '../../modules/battle/battle-arena.module';
   exports: [
     BattleComponent
   ],
-  providers: [],
-  bootstrap: [BattleComponent]
 })
 export class BattleModule { }

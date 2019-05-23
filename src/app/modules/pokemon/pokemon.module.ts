@@ -15,7 +15,5 @@ import {LifeModule} from '../life/life.module';
   exports: [
     PokemonComponent
   ],
-  providers: [],
-  bootstrap: [PokemonComponent]
 })
 export class PokemonModule { }

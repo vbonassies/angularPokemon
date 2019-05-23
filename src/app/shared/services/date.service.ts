@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {interval, Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class DateService {
 
     getDateObservable(): Observable<Date> {
-        return new Observable<Date>(observer => {
-            setInterval(() => observer.next(new Date()), 1000);
-        });
+        return interval(1000).pipe(map(e => new Date()));
     }
 }

@@ -13,7 +13,5 @@ import { MoveSelectorComponent } from './move-selector.component';
   exports: [
     MoveSelectorComponent
   ],
-  providers: [],
-  bootstrap: [MoveSelectorComponent]
 })
 export class MoveSelectorModule { }

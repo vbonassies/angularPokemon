@@ -13,7 +13,5 @@ import { LogDisplayerComponent } from './log-displayer.component';
   exports: [
     LogDisplayerComponent
   ],
-  providers: [],
-  bootstrap: [LogDisplayerComponent]
 })
 export class LogDisplayerModule { }

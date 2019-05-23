@@ -1,11 +1,18 @@
 module.exports = {
-  "roots": [
-    "<rootDir>/src"
-  ],
-  "transform": {
-    "^.+\\.tsx?$": "ts-jest"
-  },
-  "coverageReporters": [ 'html' ],
-  "coverageDirectory" : "./jest-coverage",
-  "collectCoverageFrom": ["./src/**/*.ts", "!./src/**/*.test.ts"]
-}
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    },
+    "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/src/environments/"
+    ],
+    "moduleNameMapper": {
+        'environments/(.*)$': '<rootDir>/src/environments/environment.test.ts',
+    },
+    "coverageReporters": ['html'],
+    "coverageDirectory": "./jest-coverage",
+    "collectCoverageFrom": [
+        "./src/**/*.ts",
+        "!./src/**/*.test.ts",
+    ]
+};

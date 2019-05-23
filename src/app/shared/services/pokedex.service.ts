@@ -2,20 +2,22 @@ import {Injectable} from '@angular/core';
 import {Pokemon} from '../models/pokemon/pokemon';
 import {PokemonType} from '../models/pokemon/pokemon-types';
 import {PokeApiService} from './pokeapi.service';
-import {availablePokemons} from '../pokemon-names-constant';
 import {PokeapiMoveDetail} from '../models/pokeapi-dto/pokeapi-move-detail';
 import {Observable, forkJoin, BehaviorSubject} from 'rxjs';
 import {Move} from '../models/move/move';
 import {PokeapiPokemon} from '../models/pokeapi-dto/pokeapi-pokemon';
 import {flatMap, map} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable()
 export class PokedexService {
     private pokemons: Pokemon[];
     private isInitialized = new BehaviorSubject<boolean>(false);
+    private allowedPokemons: string[];
 
     constructor(private pokeapi: PokeApiService) {
+        this.allowedPokemons = environment.availablePokemons;
         this.initializePokedex();
     }
 
@@ -30,7 +32,7 @@ export class PokedexService {
     private initializePokedex(): void {
         this.pokemons = [];
         const pokemonTasks: Observable<void>[] = [];
-        for (const pokemonName of availablePokemons) {
+        for (const pokemonName of this.allowedPokemons) {
             pokemonTasks.push(this.pokeapi.getPokemon(pokemonName).pipe(flatMap(poke => this.loadDetails(poke))));
         }
         forkJoin(pokemonTasks).subscribe(() => {
@@ -77,7 +79,6 @@ export class PokedexService {
         }
         return new Pokemon(pokemon.Name, pokemon.Speed, pokemon.MaxHp, givenLevel, pokemon.Types);
     }
-
 
 
 }

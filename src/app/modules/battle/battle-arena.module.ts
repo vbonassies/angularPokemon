@@ -17,7 +17,5 @@ import {UserIOModule} from '../userio/user-i-o.module';
   exports: [
     BattleArenaComponent
   ],
-  providers: [],
-  bootstrap: [BattleArenaComponent]
 })
 export class BattleArenaModule { }

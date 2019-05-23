@@ -13,7 +13,5 @@ import { LifeComponent } from './life.component';
   exports: [
     LifeComponent
   ],
-  providers: [],
-  bootstrap: [LifeComponent]
 })
 export class LifeModule { }
