@@ -1,5 +1,6 @@
 export enum MoveResult {
     MoveSuccess,
     MoveFails,
-    NoMove
+    NoMove,
+    WaitMove
 }

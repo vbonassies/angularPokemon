@@ -3,6 +3,7 @@ import {Battle} from '../../shared/models/battle/battle';
 import {Move} from '../../shared/models/move/move';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AttackLog} from '../../shared/models/battle/attack-log';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-battle-arena',
@@ -22,6 +23,8 @@ export class BattleArenaComponent implements OnInit {
   selectedMoveEvent = new BehaviorSubject<Move>(undefined);
   logObservable = new BehaviorSubject<AttackLog>(undefined);
   logEvent: Observable<AttackLog> = this.logObservable.asObservable();
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
       const randArena = Math.floor(Math.random() * BattleArenaComponent.ArenaNumber) + 1;
@@ -57,5 +60,9 @@ export class BattleArenaComponent implements OnInit {
   onSplashEnded() {
     this.wasSplashDisplayed = true;
     this.startBattle();
+  }
+
+  shutdownGameBoy() {
+    this.router.navigate(['']);
   }
 }

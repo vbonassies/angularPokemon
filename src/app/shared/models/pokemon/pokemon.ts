@@ -2,6 +2,7 @@ import {PokemonType} from './pokemon-types';
 import {Move} from '../move/move';
 import {MoveResult} from '../move/move-result';
 import {AttackLog} from '../battle/attack-log';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 export class Pokemon {
   public Name: string;
@@ -72,10 +73,13 @@ export class Pokemon {
     }
   }
 
-  public applyMove(enemy: Pokemon, moveToExecute: Move, generatedAccuracy: number, logger: (log: AttackLog) => void): MoveResult {
+  // tslint:disable-next-line:max-line-length
+  public applyMove(enemy: Pokemon, moveToExecute: Move, generatedAccuracy: number, logger: (log: AttackLog) => void): Observable<MoveResult> {
+    const result = new BehaviorSubject<MoveResult>(MoveResult.WaitMove);
     if (!moveToExecute || !this.hasMove(moveToExecute)) {
       logger(AttackLog.skipRound(this));
-      return MoveResult.NoMove;
+      result.next(MoveResult.NoMove);
+      return result;
     }
     let finalPv;
     if (generatedAccuracy <= moveToExecute.Accuracy) {
@@ -90,12 +94,16 @@ export class Pokemon {
       }
       const damageDealt = enemy.Hp - finalPv;
       enemy.Hp = finalPv;
-      this.isAttacking = false;
-      enemy.isAttacked = false;
       logger(AttackLog.attack(this, enemy, moveToExecute, damageDealt, this.isCritic));
-      return MoveResult.MoveSuccess;
+      setTimeout(() => {
+        this.isAttacking = false;
+        enemy.isAttacked = false;
+        result.next(MoveResult.MoveSuccess);
+      }, 1000);
+      return result;
     }
     logger(AttackLog.failAttack(this, moveToExecute));
-    return MoveResult.MoveFails;
+    result.next(MoveResult.MoveFails);
+    return result;
   }
 }

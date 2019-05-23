@@ -9,15 +9,10 @@
 .powerLed {
     width: 35px;
     height: 35px;
-}
-
-.powerLed > img {
     position: absolute;
-    top:143px;
-    left:-133px;
-    width: 35px;
-    height: 35px;
-    z-index: 10000;
+    top: 143px;
+    left: -133px;
+    z-index: 3000;
 }
 
 .startVideo {
