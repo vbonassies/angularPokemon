@@ -33,6 +33,10 @@ export class MoveSelectorComponent implements OnInit {
   @HostListener('window:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      if (this.exitSelectRequire) {
+        this.movePokedex();
+        return;
+      }
       switch (this.selectType) {
         case 'mode':
           this.moveMode();
@@ -46,6 +50,10 @@ export class MoveSelectorComponent implements OnInit {
       }
     }
     if (event.key === 'Enter') {
+      if (this.exitSelectRequire) {
+        this.onExit();
+        return;
+      }
       switch (this.selectType) {
         case 'mode':
           this.selectMode();
@@ -97,6 +105,10 @@ export class MoveSelectorComponent implements OnInit {
         this.cursor = 'fight';
         break;
     }
+  }
+
+  movePokedex() {
+    this.cursor = 'exit';
   }
 
   moveMode() {
