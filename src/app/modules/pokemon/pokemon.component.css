@@ -1,7 +1,10 @@
 .pokemonRenderer {
     position: absolute;
-    width: 150px;
     z-index: 100;
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+    object-position: bottom;
 }
 
 .pokeballRenderer {
