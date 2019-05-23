@@ -70,7 +70,7 @@ describe('PokemonSelectionComponent', () => {
         component.ngOnDestroy();
     }));
 
-    it('Should render time correcyly', fakeAsync(() => {
+    it('Should render time correctly', fakeAsync(() => {
         component.today = new Date('Thu May 23 2019 11:19:28');
         fixture.detectChanges();
         const h1 = fixture.debugElement.nativeElement.querySelector('h1');
@@ -78,15 +78,19 @@ describe('PokemonSelectionComponent', () => {
     }));
 
     it('Should redirect on pokemon choosen', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {
-        component.ngOnInit();
-        fixture.detectChanges();
+        fixture.ngZone.run(() => {
+            component.ngOnInit();
+            fixture.detectChanges();
 
-        const buttons = fixture.debugElement.nativeElement.querySelectorAll('.btn.btn-primary.btn-sm');
-        const firstPokemonExpectedPokemon = component.getAllPokemons()[0];
-        expect(buttons.length).toBe(1);
-        buttons[0].click();
-        fixture.whenStable().then(() => {
-            expect(location.path).toEqual('/battle' + firstPokemonExpectedPokemon.Name);
+            const buttons = fixture.debugElement.nativeElement.querySelectorAll('.btn.btn-primary.btn-sm');
+            const firstPokemonExpectedPokemon = component.getAllPokemons()[0];
+            expect(buttons.length).toBe(1);
+            buttons[0].click();
+            fixture.whenStable().then(() => {
+                expect(location.path).toEqual('/battle' + firstPokemonExpectedPokemon.Name);
+            });
+
+            component.ngOnDestroy();
         });
     })));
 
