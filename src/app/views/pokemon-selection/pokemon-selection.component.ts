@@ -3,8 +3,7 @@ import {PokedexService} from '../../shared/services/pokedex.service';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
 import {SpriteService} from '../../shared/services/sprite.service';
 import {DateService} from '../../shared/services/date.service';
-import {PokemonType} from '../../shared/models/pokemon/pokemon-types';
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
 
 @Component({
     templateUrl: './pokemon-selection.component.html',

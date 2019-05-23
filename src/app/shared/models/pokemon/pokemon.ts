@@ -106,4 +106,26 @@ export class Pokemon {
     result.next(MoveResult.MoveFails);
     return result;
   }
+
+  getXpPercents() {
+    return this.Xp * 100 / this.XpBeforeNextLevel;
+  }
+
+  getHpPercents() {
+    return this.Hp * 100 / this.MaxHp;
+  }
+
+  getHpColor() {
+    const currentPercent = this.getHpPercents();
+    if (currentPercent <= 20) {
+      return 'bg-danger';
+    } else if (currentPercent <= 50) {
+      return 'bg-warning';
+    }
+    return 'bg-success';
+  }
+
+  regenerate() {
+    this.Hp = this.MaxHp;
+  }
 }

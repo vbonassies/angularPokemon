@@ -43,7 +43,6 @@ export class Battle {
     const secondAttackerMove = this.getMove(secondAttacker, firstPokemonMoveName, secondPokemonMoveName);
     firstAttacker.applyMove(secondAttacker, firstAttackerMove, firstPlayerAccuracy,
         (log) => logger.next(log)).subscribe(result => {
-          console.log(result);
       if (result === MoveResult.WaitMove) {
         return;
       }

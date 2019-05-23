@@ -1,14 +1,30 @@
 <div class="container">
 <h1 class="text-center">Time is {{today | date:'HH:mm:ss'}}</h1>
     <div *ngIf="pokedexReady" class="row">
-        <div class="col-lg-2 col-md-3 col-sm-6" *ngFor="let poke of getAllPokemons()">
+        <div class="col-md-3 col-sm-6" *ngFor="let poke of getAllPokemons()">
             <div class="card">
                 <img class="pokeball" src="/assets/pictures/pokeball_card.png">
                 <img class="card-img-top pokesprite" [src]="getPokeSprite(poke)" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{poke.Name}}</h5>
-                    <p class="card-text">{{getPokemonTypes(poke)}}</p>
-                    <a [routerLink]="['/battle-arena', poke.Name]" class="btn btn-primary btn-sm">I choose you!</a>
+                    <h5 class="card-title"><b>{{poke.Name}}</b></h5>
+                    <span class="pokeTypes">{{getPokemonTypes(poke)}}</span>
+                    <hr/>
+                    <span>Hp</span>
+                    <div class="progress">
+                        <div class="progress-bar" [ngClass]="poke.getHpColor()" role="progressbar" [style.width]="poke.getHpPercents() + '%'" ></div>
+                    </div>
+                    <span>Xp</span>
+                    <div class="progress progressRenderer">
+                        <div class="progress-bar bg-info" role="progressbar" [style.width]="poke.getXpPercents() + '%'" ></div>
+                    </div>
+                    <hr/>
+                    <div class="potionDiv" *ngIf="poke.getHpPercents() < 100" (click)="poke.regenerate()"  >
+                        <span>Use a {{ poke.getHpPercents() == 0 ? 'hyper' : 'maxi' }} potion</span>
+                        <img *ngIf="poke.getHpPercents() < 100 && poke.getHpPercents() > 0" src="assets/pictures/hyper-potion.png" />
+                        <img *ngIf="poke.getHpPercents() == 0" src="assets/pictures/max-potion.png" />
+                        <hr/>
+                    </div>
+                    <button type="button" [routerLink]="['/battle-arena', poke.Name]" class="btn btn-primary btn-sm">I choose you!</button>
                 </div>
             </div>
         </div>

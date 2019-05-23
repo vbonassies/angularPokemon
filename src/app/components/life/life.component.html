@@ -1,10 +1,10 @@
 <div>
     <img [src]="lifeSprite" class="lifeRenderer" [ngClass]="isFirst ? 'firstLife' : 'secondLife'">
     <div class="progress progressRenderer" [ngClass]="isFirst ? 'hpProgressFirst' : 'hpProgressSecond'">
-        <div class="progress-bar" [ngClass]="getHpColor()" role="progressbar" [style.width]="getHpPercents() + '%'" ></div>
+        <div class="progress-bar" [ngClass]="pokemon.getHpColor()" role="progressbar" [style.width]="pokemon.getHpPercents() + '%'" ></div>
     </div>
     <div *ngIf="isFirst" class="progress progressRenderer xpProgress">
-        <div class="progress-bar bg-info" role="progressbar" [style.width]="getXpPercents() + '%'" ></div>
+        <div class="progress-bar bg-info" role="progressbar" [style.width]="pokemon.getXpPercents() + '%'" ></div>
     </div>
     <span class="labelRenderer" [ngClass]="isFirst ? 'levelFirst' : 'levelSecond'">Lv{{pokemon.Level}}</span>
     <span class="labelRenderer" [ngClass]="isFirst ? 'nameFirst' : 'nameSecond'">{{pokemon.Name}}</span>
