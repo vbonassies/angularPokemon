@@ -12,6 +12,7 @@ import {SpriteService} from '../../shared/services/sprite.service';
 export class BackgroundPokemonComponent implements OnInit, OnDestroy {
     public activePokemons: Array<BackgroundPokemon> = [];
     private interval: Timer;
+    private timeouts: Timer[] = [];
 
     @Input() pokemon: BackgroundPokemon;
 
@@ -41,16 +42,24 @@ export class BackgroundPokemonComponent implements OnInit, OnDestroy {
         const pokemonInstance = new BackgroundPokemon(pokemon, direction, BackgroundPokemonComponent.getRandomHeight());
 
         this.activePokemons.push(pokemonInstance);
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             const index = this.activePokemons.indexOf(pokemonInstance);
             if (index >= 0) {
                 this.activePokemons.splice(index, 1);
             }
+            const timeoutIndex = this.timeouts.indexOf(timeout);
+            if (timeoutIndex >= 0) {
+                this.timeouts.splice(timeoutIndex, 1);
+            }
         }, 10000);
+        this.timeouts.push(timeout);
     }
 
     ngOnDestroy(): void {
         clearInterval(this.interval);
+        for (const timeout of this.timeouts) {
+            clearTimeout(timeout);
+        }
         this.activePokemons = [];
     }
 }

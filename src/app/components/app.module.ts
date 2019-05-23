@@ -7,14 +7,13 @@ import { BattleModule } from './battle/battle.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokedexService } from '../shared/services/pokedex.service';
 import {PokemonSelectionModule} from './pokemon-selection/pokemon-selection.module';
-import { BackgroundPokemonComponent } from './background-pokemon/background-pokemon.component';
 import {SpriteService} from '../shared/services/sprite.service';
 import {HttpClientModule} from '@angular/common/http';
+import {BackgroundPokemonModule} from '../modules/background-pokemon/background-pokemon.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackgroundPokemonComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,11 +21,9 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     BattleModule,
     PokemonSelectionModule,
+    BackgroundPokemonModule,
     BattleModule,
     HttpClientModule
-  ],
-  exports: [
-    BackgroundPokemonComponent,
   ],
   providers: [PokedexService, SpriteService],
   bootstrap: [AppComponent]
