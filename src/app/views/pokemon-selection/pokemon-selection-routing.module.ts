@@ -5,6 +5,9 @@ import {PokemonSelectionComponent} from './pokemon-selection.component';
 const pokedexRoute: Routes = [{
     path: '',
     component: PokemonSelectionComponent
+}, {
+    path: '**',
+    redirectTo: ''
 }];
 
 @NgModule({
