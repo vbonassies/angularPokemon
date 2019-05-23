@@ -1,10 +1,7 @@
 .pokemonRenderer {
     position: absolute;
     z-index: 100;
-    width: 150px;
-    height: 200px;
-    object-fit: contain;
-    object-position: bottom;
+    transform-origin: bottom center;
 }
 
 .pokeballRenderer {
@@ -24,11 +21,13 @@
 }
 
 .firstPokemon {
-    bottom: 0px;
-    left: 125px;
+    bottom: 0;
+    left: 200px;
+    transform: scale(2) translateX(-50%);
 }
 
 .secondPokemon {
     bottom: 220px;
-    right: 65px;
+    right: 180px;
+    transform: scale(2) translateX(+50%);
 }
