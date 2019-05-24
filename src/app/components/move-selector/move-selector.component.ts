@@ -32,6 +32,9 @@ export class MoveSelectorComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    if (!this.exitSelectRequire && !this.moveSelectRequire) {
+      return;
+    }
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       if (this.exitSelectRequire) {
         this.movePokedex();

@@ -66,6 +66,15 @@ describe('MoveSelectorComponent', () => {
         expect(component.selectType).toBe('mode');
     }));
 
+    it('Should not listen keyboard if selectmove is not require', async(() => {
+        component.moveSelectRequire = false;
+        component.exitSelectRequire = false;
+        const fakeValue = 'fakevalue';
+        component.cursor = fakeValue;
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe(fakeValue);
+    }));
+
     it('Should change cursor on keyboard input', async(() => {
         component.moveSelectRequire = true;
         component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
