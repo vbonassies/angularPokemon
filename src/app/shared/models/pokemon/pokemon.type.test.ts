@@ -2,76 +2,55 @@ import {PokemonType} from './pokemon-types';
 import {Pokemon} from './pokemon';
 
 let firstPokemon: Pokemon;
-let firstPokemonName: string;
-let firstPokemonSpeed: number;
-let firstPokemonType: PokemonType;
-let secondPokemonType: PokemonType[];
 
 beforeEach(async () => {
-    firstPokemonName = 'PokeOne';
-    firstPokemonSpeed = 90;
-    firstPokemonType = PokemonType.electric;
-    secondPokemonType = [PokemonType.water];
+    const firstPokemonName = 'PokeOne';
+    const firstPokemonSpeed = 90;
+    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, []);
 });
 
 test('Pokemon should be stronger electric vs water', () => {
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.electric];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.water])).toBe(true);
 });
 
 
 test('Pokemon NOT should be stronger fire vs water', () => {
-    firstPokemonType = PokemonType.fire;
-    secondPokemonType = [PokemonType.water];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(false);
+    firstPokemon.Types = [PokemonType.fire];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.water])).toBe(false);
 });
 
 test('Pokemon should be stronger grass vs water', () => {
-    firstPokemonType = PokemonType.grass;
-    secondPokemonType = [PokemonType.water];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.grass];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.water])).toBe(true);
 });
 
 test('Pokemon should be stronger water vs fire', () => {
-    firstPokemonType = PokemonType.water;
-    secondPokemonType = [PokemonType.fire];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.water];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.fire])).toBe(true);
 });
 
 test('Pokemon should be stronger fire vs grass', () => {
-    firstPokemonType = PokemonType.fire;
-    secondPokemonType = [PokemonType.grass];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.fire];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.grass])).toBe(true);
 });
 
 test('Pokemon should be stronger flying vs grass', () => {
-    firstPokemonType = PokemonType.flying;
-    secondPokemonType = [PokemonType.grass];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.flying];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.grass])).toBe(true);
 });
 
 test('Pokemon should be stronger ground vs poison', () => {
-    firstPokemonType = PokemonType.ground;
-    secondPokemonType = [PokemonType.poison];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.ground];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.poison])).toBe(true);
 });
 
 test('Pokemon should be stronger bug vs grass', () => {
-    firstPokemonType = PokemonType.bug;
-    secondPokemonType = [PokemonType.grass];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.bug];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.grass])).toBe(true);
 });
 
 test('Pokemon should be stronger flying,bug vs grass', () => {
-    firstPokemonType = PokemonType.bug;
-    secondPokemonType = [PokemonType.flying, PokemonType.grass];
-    firstPokemon = new Pokemon(firstPokemonName, firstPokemonSpeed, 100, 1, [firstPokemonType]);
-    expect(firstPokemon.isStrongAgainstEnemy(secondPokemonType)).toBe(true);
+    firstPokemon.Types = [PokemonType.bug];
+    expect(firstPokemon.isStrongAgainstEnemy([PokemonType.flying, PokemonType.grass])).toBe(true);
 });
