@@ -10,6 +10,7 @@ import {PokemonSelectionModule} from '../../views/pokemon-selection/pokemon-sele
 import {SpriteService} from './sprite.service';
 import {DateService} from './date.service';
 import {MockHelper} from '../../../test-helpers/mock-helper';
+import {availablePokemons} from '../pokemon-names-constant';
 
 
 describe('PokedexService', () => {
@@ -73,5 +74,16 @@ describe('PokedexService', () => {
         expect(newPokemon.Xp).toBe(newXp);
         expect(newPokemon.Level).toBe(newLevel);
         expect(newPokemon.Hp).toBe(newHp);
+    });
+
+    const unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+    }
+
+    it('No duplicate pokemon', () => {
+        const duplicated = new Set(availablePokemons.filter(poke =>
+            availablePokemons.filter(pokeInner => pokeInner === poke).length > 1));
+        console.log(duplicated);
+        expect(duplicated.size).toBe(0);
     });
 });

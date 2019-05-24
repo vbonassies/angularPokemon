@@ -7,6 +7,8 @@ import {Subscription} from 'rxjs';
 import {StorageService} from '../../shared/services/storage.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
+declare var $: any;
+
 @Component({
     templateUrl: './pokemon-selection.component.html',
     styleUrls: ['./pokemon-selection.component.css']
@@ -85,5 +87,9 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
         } else {
             this.displayedPokemons = this.pokedex.getPokedex();
         }
+    }
+
+    goToTop() {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
     }
 }

@@ -65,6 +65,18 @@ label:hover {
     font-size: 8px;
 }
 
+.upBtn {
+    position: fixed;
+    right: 5px;
+    bottom: 100px;
+    width: 50px;
+    height: 50px;
+}
+.upBtn > img {
+    width: 30px;
+    height: 30px;
+}
+
 .pokeball {
     position: absolute;
     top: -15px;

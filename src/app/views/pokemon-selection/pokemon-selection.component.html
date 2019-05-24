@@ -42,6 +42,7 @@
             </div>
         </div>
     </div>
+    <button *ngIf="pokedexReady" type="button" class="btn btn-sm upBtn" (click)="goToTop()"><img src="assets/pictures/arrow.png" /></button>
     <div *ngIf="!pokedexReady" class="preloader">
         <img src="/assets/pictures/loading.gif"/>
     </div>
