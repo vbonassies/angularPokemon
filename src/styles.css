@@ -26,6 +26,7 @@ app-root {
 }
 
 body {
+    cursor: url("assets/cursors/pokeball.png") 15 15, auto;
     background-size: cover;
     background: #464646 url("assets/pictures/background.png") repeat-x fixed center center;
 }

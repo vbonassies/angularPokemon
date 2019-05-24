@@ -27,8 +27,9 @@
 }
 
 .btn:hover {
+    color: white;
     background-color: #ff1c1c;
-    cursor: pointer;
+    cursor: url("../../../assets/cursors/master-ball.png") 15 15, auto;
 }
 
 .btn:active {
@@ -72,5 +73,5 @@ h5, button, span {
 }
 
 .potionDiv:hover {
-    cursor: pointer;
+    cursor: url("../../../assets/cursors/master-ball.png") 15 15, auto;
 }

@@ -36,9 +36,14 @@
 }
 
 .gameboy-sceen {
+    cursor: url("../../../assets/cursors/controller.png") 50 22, auto;
     position: relative;
     display: inline-block;
     margin-top: 170px;
     background-color: #fff6ff;
     height: 556px;
+}
+
+.screenOff{
+    background-color: #000000;
 }

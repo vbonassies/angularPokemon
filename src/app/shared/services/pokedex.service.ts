@@ -78,20 +78,9 @@ export class PokedexService {
         }
 
         return forkJoin(moveDetailsObservables).pipe(map(details => {
-            let count = 0;
             for (const detail of details) {
                 const move = new Move(detail.name, detail.accuracy, detail.power);
                 pokemonItem.Moves.push(move);
-                count++;
-                if (pokemonItem.Level < 25 && count === 1) {
-                    break;
-                }
-                if (pokemonItem.Level >= 25 && pokemonItem.Level < 50 && count === 2) {
-                    break;
-                }
-                if (pokemonItem.Level >= 50 && pokemonItem.Level < 75 && count === 3) {
-                    break;
-                }
             }
             this.pokemons.push(pokemonItem);
         }));
@@ -106,8 +95,20 @@ export class PokedexService {
         const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.ReferenceHp, pokemon.Level, pokemon.Types);
         newPokemon.Hp = pokemon.Hp;
         newPokemon.Xp = pokemon.Xp;
-        newPokemon.Moves = [...pokemon.Moves];
+        this.populateMove(newPokemon, pokemon.Moves);
         return newPokemon;
+    }
+
+    private populateMove(pokemon: Pokemon, moves: Move[]): void {
+        let attackLength = 4;
+        if (pokemon.Level < 25) {
+            attackLength = 1;
+        } else if (pokemon.Level >= 25 && pokemon.Level < 50) {
+            attackLength = 2;
+        } else if (pokemon.Level >= 50 && pokemon.Level < 75) {
+            attackLength = 3;
+        }
+        pokemon.Moves = moves.splice(0, attackLength);
     }
 
     getNewRandomPokemon(givenLevel: number): Pokemon {
@@ -118,7 +119,7 @@ export class PokedexService {
             return null;
         }
         const newPokemon = new Pokemon(pokemon.Name, pokemon.Speed, pokemon.ReferenceHp, givenLevel, pokemon.Types);
-        newPokemon.Moves = [...pokemon.Moves];
+        this.populateMove(newPokemon, pokemon.Moves);
         return newPokemon;
     }
 

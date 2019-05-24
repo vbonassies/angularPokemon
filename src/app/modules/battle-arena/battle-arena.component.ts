@@ -6,11 +6,13 @@ import {AttackLog} from '../../shared/models/battle/attack-log';
 import {Router} from '@angular/router';
 import {StorageService} from '../../shared/services/storage.service';
 import {PokedexService} from '../../shared/services/pokedex.service';
+import {gameboyAnimation} from '../pokemon-animations';
 
 @Component({
   selector: 'app-battle-arena',
   templateUrl: './battle-arena.component.html',
   styleUrls: ['./battle-arena.component.css'],
+  animations: [ gameboyAnimation ]
 })
 export class BattleArenaComponent implements OnInit {
   public static ArenaNumber = 2;
@@ -23,6 +25,7 @@ export class BattleArenaComponent implements OnInit {
 
   shouldUserSelectMove = false;
   shouldUserSelectForExit = false;
+  gameboyOff = false;
   selectedMoveEvent = new BehaviorSubject<Move>(undefined);
   logObservable = new BehaviorSubject<AttackLog>(undefined);
   logEvent: Observable<AttackLog> = this.logObservable.asObservable();

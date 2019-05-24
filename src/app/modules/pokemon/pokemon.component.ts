@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
-import {pokemonAnimation, pokeballAnimation} from './pokemon-animations';
+import {pokemonAnimation, pokeballAnimation} from '../pokemon-animations';
 import {SpriteService} from '../../shared/services/sprite.service';
 import Timer = NodeJS.Timer;
 

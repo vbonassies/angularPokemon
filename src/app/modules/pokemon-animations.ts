@@ -108,3 +108,24 @@ export const pokeballAnimation = trigger('pokeballAnimation', [
             }))
     ])
 ]);
+
+export const gameboyAnimation = trigger('gameboyAnimation', [
+    state('screenOff', style({
+        opacity: 1
+    })),
+    state('screenOn', style({
+        opacity: 0
+    })),
+    state('ledOff', style({
+        opacity: 0
+    })),
+    state('ledOn', style({
+        opacity: 1
+    })),
+    transition('screenOn => screenOff', [
+        animate('750ms ease', style({ opacity: 1 }))
+    ]),
+    transition('ledOn => ledOff', [
+        animate('750ms ease', style({ opacity: 0 }))
+    ]),
+]);

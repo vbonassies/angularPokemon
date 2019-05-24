@@ -1,6 +1,6 @@
 <div class="gameboy">
     <div class="gameboy-sceen">
-        <img (click)="shutdownGameBoy()" class="powerLed" src="assets/pictures/red-led.png" />
+        <img (click)="shutdownGameBoy()" [@gameboyAnimation]="gameboyOff ? 'ledOff' : 'ledOn'" class="powerLed" src="assets/pictures/red-led.png" />
         <video *ngIf="!wasSplashDisplayed" class="startVideo" autoplay [autoplay]="'true'" (ended)="onSplashEnded()" >
             <source src="/assets/videos/gameboy-start.mp4" type="video/mp4">
         </video>
@@ -13,6 +13,9 @@
                 <app-pokemon-renderer *ngIf="battle.SecondPokemon" [pokemon]="battle.SecondPokemon" [isFirst]="false"></app-pokemon-renderer>
             </div>
             <app-user-io [logEvent]="logEvent" [exitSelectRequire]="shouldUserSelectForExit" [selectedMoveEvent]="selectedMoveEvent" [moveSelectRequire]="shouldUserSelectMove" [pokemon]="battle.FirstPokemon" ></app-user-io>
+        </div>
+        <div *ngIf="gameboyOff" class="gameboy-sceen screenOff" [@gameboyAnimation]="gameboyOff ? 'screenOff' : 'screenOn'" >
+
         </div>
     </div>
 </div>
