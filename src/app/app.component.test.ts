@@ -1,21 +1,18 @@
 import {TestBed, async} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {BackgroundPokemonComponent} from './components/background-pokemon/background-pokemon.component';
-import {SpriteService} from './shared/services/sprite.service';
+import {AppModule} from './app.module';
+import {AppBaseHrefProvider} from '../test-helpers/app-base-href.provider';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
-            ],
-            declarations: [
-                AppComponent,
-                BackgroundPokemonComponent,
+                AppModule,
             ],
             providers: [
-                SpriteService
+                AppBaseHrefProvider,
             ]
         }).compileComponents();
     }));

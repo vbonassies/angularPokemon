@@ -12,7 +12,7 @@ module.exports = {
     "coverageReporters": ['html'],
     "coverageDirectory": "./jest-coverage",
     "collectCoverageFrom": [
-        "./src/**/*.ts",
+        "./src/app/**/*.ts",
         "!./src/**/*.test.ts",
     ]
 };

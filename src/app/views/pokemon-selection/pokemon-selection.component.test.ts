@@ -84,7 +84,7 @@ describe('PokemonSelectionComponent', () => {
             component.ngOnInit();
             fixture.detectChanges();
 
-            const buttons = fixture.debugElement.nativeElement.querySelectorAll('.btn.btn-primary.btn-sm');
+            const buttons = fixture.debugElement.nativeElement.querySelectorAll('.btn.btn-sm');
             const firstPokemonExpectedPokemon = component.getAllPokemons()[0];
             expect(buttons.length).toBe(1);
             buttons[0].click();
