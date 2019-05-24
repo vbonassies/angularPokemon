@@ -104,7 +104,7 @@ describe('MoveSelectorComponent', () => {
 
     it('Should show pokedex on exit', async(() => {
         component.moveSelectRequire = true;
-        component.exitSelectRequire = true
+        component.exitSelectRequire = true;
         component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
         expect(component.cursor).toBe('exit');
     }));

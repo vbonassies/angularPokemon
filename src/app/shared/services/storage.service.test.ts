@@ -19,9 +19,9 @@ describe('StorageService', () => {
     it('Should correctly load pokemon', () => {
         const pokemon = new Pokemon('testPokemon', 12, 12, 12, undefined);
         pokemon.Xp = 12;
-        localStorage.setItem(pokemon.Name + '_HP', pokemon.Hp.toString())
-        localStorage.setItem(pokemon.Name + '_XP', pokemon.Xp.toString())
-        localStorage.setItem(pokemon.Name + '_LEVEL', pokemon.Level.toString())
+        localStorage.setItem(pokemon.Name + '_HP', pokemon.Hp.toString());
+        localStorage.setItem(pokemon.Name + '_XP', pokemon.Xp.toString());
+        localStorage.setItem(pokemon.Name + '_LEVEL', pokemon.Level.toString());
         expect(service.getUserPokemonHp(pokemon.Name)).toBe(pokemon.Hp);
         expect(service.getUserPokemonXp(pokemon.Name)).toBe(pokemon.Xp);
         expect(service.getUserPokemonLevel(pokemon.Name)).toBe(pokemon.Level);

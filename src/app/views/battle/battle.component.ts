@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Battle} from '../../shared/models/battle/battle';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PokedexService} from '../../shared/services/pokedex.service';
-import {Pokemon} from "../../shared/models/pokemon/pokemon";
+import {Pokemon} from '../../shared/models/pokemon/pokemon';
 
 @Component({
     templateUrl: './battle.component.html',
