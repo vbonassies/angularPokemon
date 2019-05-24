@@ -26,4 +26,13 @@ describe('StorageService', () => {
         expect(service.getUserPokemonXp(pokemon.Name)).toBe(pokemon.Xp);
         expect(service.getUserPokemonLevel(pokemon.Name)).toBe(pokemon.Level);
     });
+
+    it('Invalid levels should work', () => {
+        const pokemon = new Pokemon('testPokemon', 12, 12, 12, undefined);
+        localStorage.setItem(pokemon.Name + '_LEVEL', '100');
+        expect(service.getUserPokemonLevel(pokemon.Name)).toBe(99);
+
+        localStorage.setItem(pokemon.Name + '_LEVEL', '-1');
+        expect(service.getUserPokemonLevel(pokemon.Name)).toBe(1);
+    });
 });

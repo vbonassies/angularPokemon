@@ -30,7 +30,7 @@ export class StorageService {
         } else {
             let casted = +gettedLevel;
             if (casted < 0) {
-                casted = 0;
+                casted = 1;
             }
             if (casted > 99) {
                 casted = 99;
