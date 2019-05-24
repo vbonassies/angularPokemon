@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {PokemonSelectionComponent} from './pokemon-selection.component';
 import {PokemonSelectionRoutingModule} from './pokemon-selection-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        PokemonSelectionRoutingModule
+        PokemonSelectionRoutingModule,
+        ReactiveFormsModule
     ],
     exports: [
         PokemonSelectionComponent

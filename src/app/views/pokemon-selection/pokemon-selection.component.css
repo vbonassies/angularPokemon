@@ -21,6 +21,10 @@
     margin-bottom: 0;
 }
 
+.redText {
+    color: #e11c1c;
+}
+
 .btn {
     background-color: #e11c1c;
     border-color: black;
@@ -37,7 +41,6 @@
     border: #430000;
 }
 
-
 h1 {
     font-family: pokemon-title;
 }
@@ -46,12 +49,16 @@ h5 {
     font-size: 13px;
 }
 
-button, span {
+button, span, label {
     font-size: 10px;
 }
 
-h5, button, span {
+h5, button, span, label {
     font-family: pokemon-console;
+}
+
+label:hover {
+    cursor: url("../../../assets/cursors/pokeball.png") 15 15, auto;
 }
 
 .pokeTypes {
