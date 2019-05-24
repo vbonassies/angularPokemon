@@ -4,7 +4,7 @@
             <div *ngFor="let log of attackLogs" class="attackLog"
                  [ngClass]="{'kill':log.isKill, 'fail':log.attackFailed}">
                 <span *ngIf="log.attacker && log.enemy && !log.isKill && !log.skipRound && !log.attackFailed"><b [outerHTML]="log.attacker | pokemontype"></b> attacks <b [outerHTML]="log.enemy | pokemontype"></b> using <b>{{log.move.Name}}</b> dealing <b>{{log.damage}}</b> damage</span>
-                <span class="span-critic" *ngIf="log.critic">It's super effective!!!</span>
+                <span class="span-critic" *ngIf="log.critic"> It's super effective!!!</span>
                 <span *ngIf="log.skipRound"><b [outerHTML]="log.attacker | pokemontype"></b> skips it's round</span>
                 <span *ngIf="log.attackFailed"><b [outerHTML]="log.attacker | pokemontype"></b> failed to use <b>{{log.move.Name}}</b></span>
                 <span *ngIf="log.isKill"><b [outerHTML]="log.attacker | pokemontype"></b> killed <b [outerHTML]="log.enemy | pokemontype"></b></span>

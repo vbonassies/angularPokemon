@@ -91,8 +91,11 @@ describe('LogDisplayerComponent', () => {
         const logs = compiled.querySelectorAll('.attackLog span');
         expect(logs.length).toBe(2);
         expect(logs[0].textContent).toBe('Attacker attacks Enemy using ATestMove dealing 10 damage');
-        expect(logs[1].textContent).toBe('It\'s super effective!!!');
+        expect(logs[1].textContent).toBe(' It\'s super effective!!!');
         expect(logs[1].classList).toContain('span-critic');
+
+        const log = compiled.querySelector('.attackLog');
+        expect(log.textContent).toBe('Attacker attacks Enemy using ATestMove dealing 10 damage It\'s super effective!!!');
     });
 
     it('Should render level up correctly', () => {

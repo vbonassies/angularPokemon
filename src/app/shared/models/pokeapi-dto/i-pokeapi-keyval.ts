@@ -1,4 +1,4 @@
-export class PokeapiKeyval {
+export interface IPokeapiKeyval {
     name: string;
     url: string;
 }

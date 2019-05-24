@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Pokemon} from '../models/pokemon/pokemon';
 import {PokemonType} from '../models/pokemon/pokemon-types';
 import {PokeApiService} from './pokeapi.service';
-import {PokeapiMoveDetail} from '../models/pokeapi-dto/pokeapi-move-detail';
+import {IPokeapiMoveDetail} from '../models/pokeapi-dto/i-pokeapi-move-detail';
 import {Observable, forkJoin, BehaviorSubject} from 'rxjs';
 import {Move} from '../models/move/move';
-import {PokeapiPokemon} from '../models/pokeapi-dto/pokeapi-pokemon';
+import {IPokeapiPokemon} from '../models/pokeapi-dto/i-pokeapi-pokemon';
 import {flatMap, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {StorageService} from './storage.service';
@@ -50,7 +50,7 @@ export class PokedexService {
         });
     }
 
-    private loadDetails(pokemon: PokeapiPokemon): Observable<void> {
+    private loadDetails(pokemon: IPokeapiPokemon): Observable<void> {
         const speed = pokemon.stats.find(stat => stat.stat.name === 'speed').base_stat;
         const hp = pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat;
         const types: PokemonType[] = [];
@@ -61,7 +61,7 @@ export class PokedexService {
             }
         }
         const pokemonItem = new Pokemon(pokemon.name, +speed, +hp, 1, types);
-        const moveDetailsObservables: Observable<PokeapiMoveDetail>[] = [];
+        const moveDetailsObservables: Observable<IPokeapiMoveDetail>[] = [];
         const moveCount = pokemon.moves.length > 4 ? 4 : pokemon.moves.length;
         for (let i = 0; i < moveCount; i++) {
             moveDetailsObservables.push(this.pokeapi.getMoveDetail(pokemon.moves[i]));
