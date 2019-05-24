@@ -28,6 +28,12 @@
 
 .btn:hover {
     background-color: #ff1c1c;
+    cursor: pointer;
+}
+
+.btn:active {
+    background-color: #b70000;
+    border: #430000;
 }
 
 

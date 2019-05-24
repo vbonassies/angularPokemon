@@ -25,7 +25,7 @@
                         <div class="progress-bar bg-info" role="progressbar" [style.width]="poke.getXpPercents() + '%'" ></div>
                     </div>
                     <hr/>
-                    <button [disabled]="poke.isDie()" type="button" [routerLink]="['/battle-arena', poke.Name]" class="btn btn-primary btn-sm">{{poke.isDie()?'Give me a potion..': 'I choose you!'}}</button>
+                    <button [disabled]="poke.isDie()" type="button" [routerLink]="['/battle-arena', poke.Name]" class="btn btn-sm">{{poke.isDie()?'Give me a potion..': 'I choose you!'}}</button>
                 </div>
             </div>
         </div>
