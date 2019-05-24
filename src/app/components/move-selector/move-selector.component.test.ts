@@ -1,7 +1,7 @@
-import {RouterModule, Routes} from '@angular/router';
+import {Router, RouterModule, Routes} from '@angular/router';
 import {DummyComponent} from '../../../test-helpers/dummy.component';
 import {MoveSelectorComponent} from './move-selector.component';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {AppRoutingModule} from '../../app-routing.module';
 import {PokeApiService} from '../../shared/services/pokeapi.service';
@@ -9,8 +9,9 @@ import {PokedexService} from '../../shared/services/pokedex.service';
 import {StorageService} from '../../shared/services/storage.service';
 import {AppBaseHrefProvider} from '../../../test-helpers/app-base-href.provider';
 import {MockHelper} from '../../../test-helpers/mock-helper';
-import {BehaviorSubject} from 'rxjs';
 import {Move} from '../../shared/models/move/move';
+import {Location} from '@angular/common';
+import {Pokemon} from '../../shared/models/pokemon/pokemon';
 
 
 const testRoutes: Routes = [
@@ -75,8 +76,9 @@ describe('MoveSelectorComponent', () => {
         expect(component.cursor).toBe(fakeValue);
     }));
 
-    it('Should change cursor on keyboard input', async(() => {
+    it('Should change cursor on keyboard input mode', async(() => {
         component.moveSelectRequire = true;
+        component.selectType = 'mode';
         component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
         expect(component.cursor).toBe('fight');
         component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
@@ -89,18 +91,81 @@ describe('MoveSelectorComponent', () => {
         expect(component.cursor).toBe('fight');
     }));
 
-    it('Should rise observable on move selected', async(() => {
-        const observable = new BehaviorSubject<Move>(undefined);
+    it('Should change cursor on keyboard input run', async(() => {
         component.moveSelectRequire = true;
-        component.selectedMoveEvent = observable;
-        const move = new Move('Test move', 12, 12);
-        observable.subscribe(gettedMove => {
-            if (gettedMove !== undefined) {
-                expect(gettedMove).toBe(move);
-            }
-        });
-        component.onMoveSelected(move);
+        component.selectType = 'run';
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('yes');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('no');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('yes');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('no');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('yes');
     }));
+
+    it('Should change select on mode', async(() => {
+        component.moveSelectRequire = true;
+        component.selectType = 'mode';
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('fight');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        expect(component.selectType).toBe('fight');
+        component.selectType = 'mode';
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('run');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        expect(component.selectType).toBe('run');
+
+    }));
+
+    it('Should change cursor on keyboard input fight', async(() => {
+        component.moveSelectRequire = true;
+        component.selectType = 'fight';
+        component.pokemon = new Pokemon('test', 12, 12, 99, undefined);
+        component.pokemon.Moves = [
+            new Move('testMove1', 1, 1),
+            new Move('testMove2', 1, 1),
+            new Move('testMove3', 1, 1),
+            new Move('testMove4', 1, 1)
+        ];
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('move1');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('back');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('move4');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('move3');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('move2');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        expect(component.cursor).toBe('move1');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('move2');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('move3');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('move4');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('back');
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        expect(component.cursor).toBe('move1');
+    }));
+
+    it('Should redirect on run choosen', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {
+        fixture.ngZone.run(() => {
+            component.ngOnInit();
+            component.onRun();
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(location.path()).toEqual('');
+            });
+        });
+    })));
 
     it('Should show pokedex on exit', async(() => {
         component.moveSelectRequire = true;

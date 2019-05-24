@@ -126,28 +126,28 @@ export class MoveSelectorComponent implements OnInit {
     let finalCursor = '';
     switch (this.cursor) {
       case 'move1':
-        if (this.pokemon.Moves.length === 1) {
+        if (!up && this.pokemon.Moves.length === 1) {
           finalCursor = 'back';
           break;
         }
         finalCursor = up ? 'back' : 'move2';
         break;
       case 'move2':
-        if (this.pokemon.Moves.length === 2) {
+        if (!up && this.pokemon.Moves.length === 2) {
           finalCursor = 'back';
           break;
         }
         finalCursor = up ? 'move1' : 'move3';
         break;
       case 'move3':
-        if (this.pokemon.Moves.length === 3) {
+        if (!up && this.pokemon.Moves.length === 3) {
           finalCursor = 'back';
           break;
         }
         finalCursor = up ? 'move2' : 'move4';
         break;
       case 'move4':
-        if (this.pokemon.Moves.length === 4) {
+        if (!up && this.pokemon.Moves.length === 4) {
           finalCursor = 'back';
           break;
         }
