@@ -34,7 +34,7 @@ export class BattleArenaComponent implements OnInit {
       this.chooseArena = `/assets/pictures/arenas/${randArena}.png`;
   }
 
-  turnLoop(): void {
+  private turnLoop(): void {
     this.shouldUserSelectMove = true;
   }
 
