@@ -1,5 +1,5 @@
 import {Router, RouterModule, Routes} from '@angular/router';
-import {async, ComponentFixture, fakeAsync, inject, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {Location} from '@angular/common';
 import {BattleArenaComponent} from './battle-arena.component';
 import {DummyComponent} from '../../../test-helpers/dummy.component';
@@ -13,6 +13,7 @@ import {StorageService} from '../../shared/services/storage.service';
 import {AppBaseHrefProvider} from '../../../test-helpers/app-base-href.provider';
 import {BattleArenaModule} from './battle-arena.module';
 import {MockHelper} from '../../../test-helpers/mock-helper';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 const testRoutes: Routes = [
     {
@@ -36,6 +37,7 @@ describe('LogBattleArenaComponent', () => {
                 AppRoutingModule,
                 RouterModule.forChild(testRoutes),
                 BattleArenaModule,
+                NoopAnimationsModule,
             ],
             providers: [
                 PokeApiService,
@@ -65,6 +67,7 @@ describe('LogBattleArenaComponent', () => {
             fixture.detectChanges();
 
             component.shutdownGameBoy();
+            tick(1000);
             fixture.whenStable().then(() => {
                 expect(location.path()).toEqual('');
             });
