@@ -61,16 +61,18 @@ describe('LogBattleArenaComponent', () => {
         httpMock.verify();
     });
 
-    it('Should redirect to home', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {
-        fixture.ngZone.run(() => {
-            component.ngOnInit();
-            fixture.detectChanges();
+    it('Should redirect to home', fakeAsync(() => {
+        inject([Router, Location], (router: Router, location: Location) => {
+            fixture.ngZone.run(() => {
+                component.ngOnInit();
+                fixture.detectChanges();
 
-            component.shutdownGameBoy();
-            tick(1000);
-            fixture.whenStable().then(() => {
-                expect(location.path()).toEqual('');
+                component.shutdownGameBoy();
+                tick(1000);
+                fixture.whenStable().then(() => {
+                    expect(location.path()).toEqual('');
+                });
             });
-        });
-    })));
+        })();
+    }));
 });

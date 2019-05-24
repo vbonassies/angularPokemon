@@ -52,7 +52,7 @@ test('hasMove return true when pokemon has the move', () => {
     expect(newPokemon.hasMove(fakeMove)).toBe(false);
 });
 
-test('undefined move must return false', () => {
+test('undefined move must return false', (done) => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
     const type = PokemonType.electric;
@@ -62,11 +62,12 @@ test('undefined move must return false', () => {
 
     newPokemon.applyMove(newPokemon, null, 1, emptyLog).subscribe((res) => {
         expect(res).toBe(MoveResult.NoMove);
-        expect(newPokemon.Hp).toBe(100);
+        expect(newPokemon.Hp).toBe(105);
+        done();
     });
 });
 
-test('If generated accuracy is greater than move accuracy, applyMove must fail', () => {
+test('If generated accuracy is greater than move accuracy, applyMove must fail', (done) => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
     const type = PokemonType.electric;
@@ -76,11 +77,12 @@ test('If generated accuracy is greater than move accuracy, applyMove must fail',
 
     newPokemon.applyMove(newPokemon, pokemonMove, 99, emptyLog).subscribe((res) => {
         expect(res).toBe(MoveResult.MoveFails);
-        expect(newPokemon.Hp).toBe(100);
+        expect(newPokemon.Hp).toBe(105);
+        done();
     });
 });
 
-test('If generated accuracy is less than move accuracy, applyMove must fail, applyMove must success', () => {
+test('If generated accuracy is less than move accuracy, applyMove must fail, applyMove must success', (done) => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
     const type = PokemonType.electric;
@@ -93,10 +95,11 @@ test('If generated accuracy is less than move accuracy, applyMove must fail, app
     newPokemon.applyMove(newPokemon, pokemonMove, 2, emptyLog).subscribe((res) => {
         expect(res).toBe(MoveResult.MoveSuccess);
         expect(newPokemon.Hp).toBe(expectedNewPv);
+        done();
     });
 });
 
-test('If generated accuracy is equals than move accuracy, applyMove must fail, applyMove must success', () => {
+test('If generated accuracy is equals than move accuracy, applyMove must fail, applyMove must success', (done) => {
     const pokemonName = 'Pikachu';
     const pokemonSpeed = 90;
     const type = PokemonType.electric;
@@ -108,5 +111,6 @@ test('If generated accuracy is equals than move accuracy, applyMove must fail, a
     newPokemon.applyMove(newPokemon, pokemonMove, 2, emptyLog).subscribe((res) => {
         expect(res).toBe(MoveResult.MoveSuccess);
         expect(newPokemon.Hp).toBe(expectedNewPv);
+        done();
     });
 });

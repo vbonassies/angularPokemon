@@ -72,52 +72,52 @@ describe('MoveSelectorComponent', () => {
         component.exitSelectRequire = false;
         const fakeValue = 'fakevalue';
         component.cursor = fakeValue;
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe(fakeValue);
     }));
 
     it('Should change cursor on keyboard input mode', async(() => {
         component.moveSelectRequire = true;
         component.selectType = 'mode';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('fight');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('run');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('fight');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('run');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('fight');
     }));
 
     it('Should change cursor on keyboard input run', async(() => {
         component.moveSelectRequire = true;
         component.selectType = 'run';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('yes');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('no');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('yes');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('no');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('yes');
     }));
 
     it('Should change select on mode', async(() => {
         component.moveSelectRequire = true;
         component.selectType = 'mode';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('fight');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
         expect(component.selectType).toBe('fight');
         component.selectType = 'mode';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('run');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
         expect(component.selectType).toBe('run');
 
     }));
@@ -132,45 +132,47 @@ describe('MoveSelectorComponent', () => {
             new Move('testMove3', 1, 1),
             new Move('testMove4', 1, 1)
         ];
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('move1');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('back');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('move4');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('move3');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('move2');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowUp' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowUp'}));
         expect(component.cursor).toBe('move1');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('move2');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('move3');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('move4');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('back');
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('move1');
     }));
 
-    it('Should redirect on run choosen', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {
-        fixture.ngZone.run(() => {
-            component.ngOnInit();
-            component.onRun();
-            fixture.detectChanges();
-            fixture.whenStable().then(() => {
-                expect(location.path()).toEqual('');
+    it('Should redirect on run choosen', async(() => {
+        inject([Router, Location], (router: Router, location: Location) => {
+            fixture.ngZone.run(() => {
+                component.ngOnInit();
+                component.onRun();
+                fixture.detectChanges();
+                return fixture.whenStable().then(() => {
+                    expect(location.path()).toEqual('');
+                });
             });
-        });
-    })));
+        })();
+    }));
 
     it('Should show pokedex on exit', async(() => {
         component.moveSelectRequire = true;
         component.exitSelectRequire = true;
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
         expect(component.cursor).toBe('exit');
     }));
 });

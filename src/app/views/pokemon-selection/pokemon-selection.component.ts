@@ -44,8 +44,12 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.pokeDexSubscription.unsubscribe();
-        this.subscription.unsubscribe();
+        if (this.pokeDexSubscription) {
+            this.pokeDexSubscription.unsubscribe();
+        }
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     getAllPokemons(): Pokemon[] {

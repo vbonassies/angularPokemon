@@ -93,22 +93,4 @@ describe('PokemonSelectionComponent', () => {
         const h1 = fixture.debugElement.nativeElement.querySelectorAll('h1');
         expect(h1[1].textContent).toBe('Time is 11:19:28');
     }));
-
-    it('Should redirect on pokemon choosen', fakeAsync(inject([Router, Location], (router: Router, location: Location) => {
-        fixture.ngZone.run(() => {
-            component.ngOnInit();
-            fixture.detectChanges();
-
-            const buttons = fixture.debugElement.nativeElement.querySelectorAll('.card .btn.btn-sm');
-            const firstPokemonExpectedPokemon = component.getAllPokemons()[0];
-            expect(buttons.length).toBe(1);
-            buttons[0].click();
-            fixture.whenStable().then(() => {
-                expect(location.path).toEqual('/battle-arena' + firstPokemonExpectedPokemon.Name);
-            });
-
-            component.ngOnDestroy();
-        });
-    })));
-
 });
