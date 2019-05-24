@@ -11,9 +11,6 @@ describe('LifeComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [LifeComponent],
-            providers: [
-                SpriteService,
-            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LifeComponent);
