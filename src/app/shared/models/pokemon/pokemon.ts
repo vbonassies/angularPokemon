@@ -50,7 +50,7 @@ export class Pokemon {
   public isStrongAgainstEnemy(secondPokemonType: PokemonType[]) {
     for (const typeFirstPokemon of this.Types) {
       for (const typeSecondPokemon of secondPokemonType) {
-        if (typeFirstPokemon === PokemonType.fire && typeSecondPokemon === PokemonType.water) {
+        if (typeFirstPokemon === PokemonType.fire && typeSecondPokemon === PokemonType.grass) {
           return true;
         } else if (typeFirstPokemon === PokemonType.grass && typeSecondPokemon === PokemonType.water) {
           return true;
@@ -65,9 +65,9 @@ export class Pokemon {
         } else if (typeFirstPokemon === PokemonType.electric && typeSecondPokemon === PokemonType.water) {
           return true;
         }
-        return false;
       }
     }
+    return false;
   }
 
   // tslint:disable-next-line:max-line-length
@@ -105,17 +105,21 @@ export class Pokemon {
     return result;
   }
 
-  tryLevelUp(ennemy: Pokemon, logger: BehaviorSubject<AttackLog>) {
-    let wonXp = Math.ceil(ennemy.Level * 2);
-    logger.next(AttackLog.wonXp(this, wonXp));
+  tryLevelUp(ennemy: Pokemon, logger: BehaviorSubject<AttackLog>, missingXp = -1) {
+    const wonXp = missingXp > -1 ? missingXp : Math.ceil(ennemy.Level * 2);
+    if (missingXp === -1) {
+      logger.next(AttackLog.wonXp(this, wonXp));
+    }
+    if (this.Level === 99) {
+      return;
+    }
     if (wonXp >= (this.XpBeforeNextLevel - this.Xp)) {
-      wonXp -= (this.XpBeforeNextLevel - this.Xp);
-      if (this.Level < 99) {
-        logger.next(AttackLog.levelUp(this));
-        this.setLevel(this.Level + 1);
-      } else {
-        wonXp = (this.XpBeforeNextLevel - this.Xp);
-      }
+      const missingXpCalc = wonXp - this.XpBeforeNextLevel + this.Xp;
+      logger.next(AttackLog.levelUp(this));
+      this.setLevel(this.Level + 1);
+      this.tryLevelUp(ennemy, logger, missingXpCalc);
+    } else if (this.Level < 99) {
+      this.Xp += wonXp;
     }
     return;
   }

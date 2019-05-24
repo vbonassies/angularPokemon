@@ -80,6 +80,9 @@ export class BattleArenaComponent implements OnInit {
   }
 
   shutdownGameBoy() {
-    this.router.navigate(['']);
+    this.gameboyOff = true;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 1000);
   }
 }

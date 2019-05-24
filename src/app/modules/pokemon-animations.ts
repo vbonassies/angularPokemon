@@ -113,19 +113,19 @@ export const gameboyAnimation = trigger('gameboyAnimation', [
     state('screenOff', style({
         opacity: 1
     })),
-    state('screenOn', style({
-        opacity: 0
-    })),
     state('ledOff', style({
         opacity: 0
     })),
     state('ledOn', style({
         opacity: 1
     })),
-    transition('screenOn => screenOff', [
-        animate('750ms ease', style({ opacity: 1 }))
+    transition('* => screenOff', [
+        animate('1000ms ease', keyframes([
+            style({ opacity: 0 }),
+            style({ opacity: 1 })
+        ]))
     ]),
     transition('ledOn => ledOff', [
-        animate('750ms ease', style({ opacity: 0 }))
+        animate('1000ms ease', style({ opacity: 0 }))
     ]),
 ]);

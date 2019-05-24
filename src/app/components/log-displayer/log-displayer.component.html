@@ -9,7 +9,7 @@
                 <span *ngIf="log.attackFailed"><b [outerHTML]="log.attacker | pokemontype"></b> failed to use <b>{{log.move.Name}}</b></span>
                 <span *ngIf="log.isKill"><b [outerHTML]="log.attacker | pokemontype"></b> killed <b [outerHTML]="log.enemy | pokemontype"></b></span>
                 <span *ngIf="log.message">{{log.message}}</span>
-                <span *ngIf="log.levelUp"><b [outerHTML]="log.attacker | pokemontype"></b> is now level {{log.attacker.Level + 1}}!</span>
+                <span *ngIf="log.levelUp"><b [outerHTML]="log.attacker | pokemontype"></b> is now level {{log.attacker.Level}}!</span>
                 <span *ngIf="log.xpWon"><b [outerHTML]="log.attacker | pokemontype"></b> won {{log.xpWon}} XPs</span>
             </div>
         </div>

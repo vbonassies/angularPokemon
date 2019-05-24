@@ -45,5 +45,11 @@
 }
 
 .screenOff{
-    background-color: #000000;
+    position: absolute !important;
+    background-color: #000000 !important;
+    z-index: 7000;
+    width: 602px;
+    left: -1px;
+    height: 562px;
+    top: -2px;
 }

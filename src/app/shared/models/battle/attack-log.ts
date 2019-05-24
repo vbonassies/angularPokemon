@@ -50,10 +50,10 @@ export class AttackLog {
   }
 
   static levelUp(pokemon: Pokemon) {
-    return new AttackLog(pokemon, null, null, 0, false, false, false, null, null, false, null);
+    return new AttackLog(pokemon, null, null, 0, false, false, false, null, null, true, null);
   }
 
   static wonXp(pokemon: Pokemon, xpWon: number) {
-    return new AttackLog(pokemon, null, null, 0, false, false, false, null, null, true, xpWon);
+    return new AttackLog(pokemon, null, null, 0, false, false, false, null, null, false, xpWon);
   }
 }
