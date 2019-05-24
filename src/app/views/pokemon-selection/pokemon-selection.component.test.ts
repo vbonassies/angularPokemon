@@ -72,6 +72,21 @@ describe('PokemonSelectionComponent', () => {
         component.ngOnDestroy();
     }));
 
+    it('Should search by regex for pokemon', async(() => {
+        component.ngOnInit();
+        component.pokemonNameSearch.setValue('pIk.*hu');
+        component.onSearch();
+        expect(component.displayedPokemons.length).toBe(1);
+        expect(component.displayedPokemons[0].Name).toBe('Pikachu');
+        component.pokemonNameSearch.setValue('');
+        component.onSearch();
+        expect(component.displayedPokemons.length).toBe(1);
+        expect(component.displayedPokemons[0].Name).toBe('Pikachu');
+        component.pokemonNameSearch.setValue('fakePoke');
+        component.onSearch();
+        expect(component.displayedPokemons.length).toBe(0);
+    }));
+
     it('Should render time correctly', fakeAsync(() => {
         component.today = new Date('Thu May 23 2019 11:19:28');
         fixture.detectChanges();

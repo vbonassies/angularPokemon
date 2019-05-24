@@ -16,7 +16,7 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
     pokedexReady: boolean;
     private subscription: Subscription;
     private pokeDexSubscription: Subscription;
-    private displayedPokemons: Pokemon[];
+    displayedPokemons: Pokemon[];
 
     searchForm: FormGroup;
     pokemonNameSearch: FormControl;
@@ -75,7 +75,6 @@ export class PokemonSelectionComponent implements OnInit, OnDestroy {
     }
 
     onSearch() {
-        console.log('here');
         if (this.searchForm.valid) {
             const regex = new RegExp(this.pokemonNameSearch.value as string, 'i');
             this.displayedPokemons = this.displayedPokemons.filter(pok => regex.test(pok.Name));

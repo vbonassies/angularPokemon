@@ -166,7 +166,9 @@ export class MoveSelectorComponent implements OnInit {
   }
 
   onMoveSelected(move: Move): void {
-    this.selectedMoveEvent.next(move);
+    if (this.selectedMoveEvent) {
+      this.selectedMoveEvent.next(move);
+    }
     this.selectType = 'mode';
   }
 
