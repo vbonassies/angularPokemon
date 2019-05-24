@@ -40,8 +40,8 @@ describe('LogDisplayerComponent', () => {
 
         const logs = compiled.querySelectorAll('.attackLog');
         expect(logs.length).toBe(2);
-        expect(logs[0].textContent).toContain('Attacker attacks Enemy using ATestMove dealing 10 damage');
-        expect(logs[1].textContent).toContain('Enemy attacks Attacker using ATestMove dealing 20 damage');
+        expect(logs[0].textContent).toBe('Attacker attacks Enemy using ATestMove dealing 10 damage');
+        expect(logs[1].textContent).toBe('Enemy attacks Attacker using ATestMove dealing 20 damage');
     });
 
     it('Should render kill message correctly', () => {
@@ -50,7 +50,7 @@ describe('LogDisplayerComponent', () => {
         fixture.detectChanges();
 
         const log = compiled.querySelector('.attackLog');
-        expect(log.textContent).toContain('Attacker killed Enemy');
+        expect(log.textContent).toBe('Attacker killed Enemy');
         expect(log.classList).toContain('kill');
     });
 
@@ -60,7 +60,7 @@ describe('LogDisplayerComponent', () => {
         fixture.detectChanges();
 
         const log = compiled.querySelector('.attackLog');
-        expect(log.textContent).toContain('Attacker skips it\'s round');
+        expect(log.textContent).toBe('Attacker skips it\'s round');
     });
 
     it('Should render attack fail correctly', () => {
@@ -69,7 +69,7 @@ describe('LogDisplayerComponent', () => {
         fixture.detectChanges();
 
         const log = compiled.querySelector('.attackLog');
-        expect(log.textContent).toContain('Attacker failed to use ATestMove');
+        expect(log.textContent).toBe('Attacker failed to use ATestMove');
         expect(log.classList).toContain('fail');
     });
 
@@ -80,18 +80,34 @@ describe('LogDisplayerComponent', () => {
         fixture.detectChanges();
 
         const log = compiled.querySelector('.attackLog');
-        expect(log.textContent).toContain(message);
+        expect(log.textContent).toBe(message);
     });
 
-    it('Should render critical correcyly', () => {
+    it('Should render critical correctly', () => {
         component.attackLogs.push(AttackLog.attack(poke1, poke2, pokemonMove, 10, true));
 
         fixture.detectChanges();
 
         const logs = compiled.querySelectorAll('.attackLog span');
         expect(logs.length).toBe(2);
-        expect(logs[0].textContent).toContain('Attacker attacks Enemy using ATestMove dealing 10 damage');
-        expect(logs[1].textContent).toContain('It\'s super effective!!!');
+        expect(logs[0].textContent).toBe('Attacker attacks Enemy using ATestMove dealing 10 damage');
+        expect(logs[1].textContent).toBe('It\'s super effective!!!');
         expect(logs[1].classList).toContain('span-critic');
+    });
+
+    it('Should render level up correctly', () => {
+        component.attackLogs.push(AttackLog.levelUp(poke1));
+        fixture.detectChanges();
+
+        const log = compiled.querySelector('.attackLog');
+        expect(log.textContent).toBe('Attacker is now level 1!');
+    });
+
+    it('Should render level up correctly', () => {
+        component.attackLogs.push(AttackLog.wonXp(poke1, 100));
+        fixture.detectChanges();
+
+        const log = compiled.querySelector('.attackLog');
+        expect(log.textContent).toBe('Attacker won 100 XPs');
     });
 });
