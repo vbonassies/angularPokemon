@@ -39,9 +39,7 @@ describe('LogBattleArenaComponent', () => {
             ],
             providers: [
                 PokeApiService,
-                {provide: PokedexService, useClass: PokedexService},
-                SpriteService,
-                DateService,
+                PokedexService,
                 StorageService,
                 AppBaseHrefProvider,
             ]
