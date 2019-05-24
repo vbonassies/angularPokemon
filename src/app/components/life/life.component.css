@@ -4,12 +4,12 @@
     z-index: 100;
 }
 
-.firstLife {
+.first > .lifeRenderer {
     bottom: 5px;
     right: 40px;
 }
 
-.secondLife {
+.second > .lifeRenderer {
     top: 60px;
     left: 40px;
 }
@@ -27,24 +27,24 @@
     right: 52px;
 }
 
-.nameFirst {
+.first > .nameLabel {
     font-size: 10px;
     bottom: 51px;
     left: 385px;
 }
 
-.nameSecond {
+.second > .nameLabel {
     font-size: 10px;
     top: 68px;
     left: 50px;
 }
 
-.levelFirst {
+.first > .levelLabel {
     bottom: 51px;
     left: 500px;
 }
 
-.levelSecond {
+.second > .levelLabel {
     top: 68px;
     left: 165px;
 }
@@ -55,23 +55,26 @@
     position: absolute;
 }
 
-.hpProgressFirst {
+.first > .hpProgress {
     height: 6px;
     width: 93px;
-    bottom:38px;
-    left:452px;
+    bottom: 38px;
+    left: 452px;
 }
+
+.second > .hpProgress {
+    height: 6px;
+    width: 96px;
+    top: 94px;
+    left: 118px;
+}
+
 
 .xpProgress {
     height: 5px;
     width: 125px;
-    bottom:8px;
-    left:420px;
+    bottom: 8px;
+    left: 420px;
 }
 
-.hpProgressSecond {
-    height: 6px;
-    width: 96px;
-    top:94px;
-    left:118px;
-}
+
