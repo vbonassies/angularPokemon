@@ -12,6 +12,7 @@ import {MockHelper} from '../../../test-helpers/mock-helper';
 import {Move} from '../../shared/models/move/move';
 import {Location} from '@angular/common';
 import {Pokemon} from '../../shared/models/pokemon/pokemon';
+import {BehaviorSubject} from 'rxjs';
 
 
 const testRoutes: Routes = [
@@ -106,21 +107,82 @@ describe('MoveSelectorComponent', () => {
         expect(component.cursor).toBe('yes');
     }));
 
-    it('Should change select on mode', async(() => {
+    it('Should change select on mode keyboard', async(() => {
         component.moveSelectRequire = true;
         component.selectType = 'mode';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
-        expect(component.cursor).toBe('fight');
+        component.cursor = 'fight';
         component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
         expect(component.selectType).toBe('fight');
         component.selectType = 'mode';
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
-        component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'ArrowDown'}));
-        expect(component.cursor).toBe('run');
+        component.cursor = 'run';
         component.handleKeyboardEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
         expect(component.selectType).toBe('run');
 
     }));
+
+    it('Should change select on no run keyboard', async(() => {
+        component.moveSelectRequire = true;
+        component.selectType = 'run';
+        component.cursor = 'no';
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        expect(component.selectType).toBe('mode');
+    }));
+
+    it('Should raise move selected on keyboard move select', (done) => {
+        component.moveSelectRequire = true;
+        component.selectType = 'fight';
+        component.cursor = 'move1';
+        const observable = new BehaviorSubject<Move>(undefined);
+        component.selectedMoveEvent = observable;
+        component.pokemon = new Pokemon('test', 12, 12, 99, undefined);
+        component.pokemon.Moves = [
+            new Move('testMove1', 1, 1),
+            new Move('testMove2', 1, 1),
+            new Move('testMove3', 1, 1),
+            new Move('testMove4', 1, 1)
+        ];
+        let expectedMove = 0;
+        observable.subscribe((mv) => {
+            if (mv) {
+                expect(mv).toBe(component.pokemon.Moves[expectedMove]);
+                if (expectedMove === 3) {
+                    done();
+                }
+            }
+        });
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        component.moveSelectRequire = true;
+        component.selectType = 'fight';
+        component.cursor = 'move2';
+        expectedMove = 1;
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        component.moveSelectRequire = true;
+        component.selectType = 'fight';
+        component.cursor = 'move3';
+        expectedMove = 2;
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        component.moveSelectRequire = true;
+        component.selectType = 'fight';
+        component.cursor = 'move4';
+        expectedMove = 3;
+        component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+    });
+
+    it('Should redirect on run with keyboard', fakeAsync(inject([Router, Location],
+        (router: Router, location: Location) => {
+        fixture.ngZone.run(() => {
+            component.moveSelectRequire = true;
+            component.selectType = 'run';
+            component.cursor = 'yes';
+            component.ngOnInit();
+            component.handleKeyboardEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(location.path()).toEqual('');
+            });
+        });
+
+    })));
 
     it('Should change cursor on keyboard input fight', async(() => {
         component.moveSelectRequire = true;
