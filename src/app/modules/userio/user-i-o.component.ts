@@ -31,7 +31,7 @@ export class UserIOComponent implements OnInit, OnDestroy {
     @Input()
     logEvent: Observable<AttackLog>;
 
-    private subscription: Subscription;
+    private subscription: Subscription = null;
 
     ngOnInit(): void {
         this.subscription = this.logEvent.subscribe(logCombat => {
@@ -42,7 +42,9 @@ export class UserIOComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     onLogged(log: string): void {

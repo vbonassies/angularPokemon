@@ -74,6 +74,4 @@ describe('UserIOComponent', () => {
         expect(logDisplayer.style.width).toBe('400px');
         component.moveSelectRequire = false;
     });
-
-
 });
